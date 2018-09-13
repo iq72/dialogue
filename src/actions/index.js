@@ -3,3 +3,8 @@ export const switchDialogue = ()=>({
     payload: 'result_of_switch_dialogue' 
 })
 
+export const editText = (text)=>({
+    type: 'EDIT_TEXT',
+    text
+})
+

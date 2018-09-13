@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {switchDialogue} from './actions/switchDialogue'
+import {switchDialogue} from './actions/index'
 
 import logo from './logo.svg';
 import './App.css';
-
+import InputBox from './Containers/InputBox'
 
 const mapStateToProps = state => ({
   ...state
@@ -31,6 +31,8 @@ class App extends Component {
         </p>
         <button onClick={this.switchDialogue}>Test redux action</button>
         <p>{this.props.count}</p>
+
+        <InputBox />
       </div>
     );
   }
