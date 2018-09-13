@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {switchDialogue, addDialogue} from './actions/index';
+import { addDialogue} from './actions/index';
 
 
 import logo from './logo.svg';

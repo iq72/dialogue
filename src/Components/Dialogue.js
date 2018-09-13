@@ -1,15 +1,11 @@
 import React from 'react'
 
+const Dialogue =({actor,text,act})=>(
+    <div>
+        <span>{actor}</span>
+        <p>{text}</p>
+        <p>{act}</p>
+    </div>
+)
 
-
-export default class Dialogue extends React.Component{
-    render(){
-        return(
-            <div>
-                <span>{this.props.actor}</span>
-                <p>{this.props.text}</p>
-                <p>{this.props.act}</p>
-            </div>
-        )
-    }
-}
+export default Dialogue
