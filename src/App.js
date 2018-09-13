@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {switchDialogue} from './actions/index'
+import {switchDialogue, addDialogue} from './actions/index';
+
 
 import logo from './logo.svg';
 import './App.css';
 import InputBox from './Containers/InputBox'
+import Dialogues from './Containers/Dialogues'
+
+let d= {
+  actor:'customer',
+  text: '有没有55寸的电视',
+  act:'进店'
+}
 
 const mapStateToProps = state => ({
   ...state
 })
 
  const mapDispatchToProps = dispatch => ({
-  switchDialogue: () => dispatch(switchDialogue())
+  addDialogue: (actor,text,act) => dispatch(addDialogue(actor,text,act))
  })
 
 class App extends Component {
 
-  switchDialogue=(event)=>{
-    this.props.switchDialogue();
+  addDialogue=(event)=>{
+    this.props.addDialogue(d.actor,d.text,d.act);
   }
   render() {
     return (
@@ -29,9 +37,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <button onClick={this.switchDialogue}>Test redux action</button>
+        <button onClick={this.addDialogue}>Test redux action</button>
         <p>{this.props.count}</p>
-
+        <Dialogues />
         <InputBox />
       </div>
     );

@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { connect } from 'react-redux'
 import InputBox from '../Components/InputBox'
 import {switchDialogue} from '../actions'
