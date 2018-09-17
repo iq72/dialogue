@@ -10,9 +10,7 @@ export const editText = (text)=>({
     text
 })
 
-export const addDialogue = (actor,text,act) =>({
+export const addDialogue = (dialogue) =>({
     type:'ADD_DIALOGUE',
-    actor:actor,
-    text:text,
-    act:act
+    dialogue
 })

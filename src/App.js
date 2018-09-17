@@ -8,11 +8,7 @@ import './App.css';
 import InputBox from './Containers/InputBox'
 import Dialogues from './Containers/Dialogues'
 
-let d= {
-  actor:'customer',
-  text: '有没有55寸的电视',
-  act:'进店'
-}
+
 
 const mapStateToProps = state => ({
   ...state
@@ -25,7 +21,13 @@ const mapStateToProps = state => ({
 class App extends Component {
 
   addDialogue=(event)=>{
-    this.props.addDialogue(d.actor,d.text,d.act);
+    let d= {
+      actor:'customer',
+      text: '有没有55寸的电视',
+      act:'进店'
+    }
+    d.actor=event.target.innerText;
+    this.props.addDialogue(d);
   }
   render() {
     return (
@@ -37,7 +39,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <button onClick={this.addDialogue}>Test redux action</button>
+        <button onClick={this.addDialogue}>custom</button>
+        <button onClick={this.addDialogue}>shopkeeper</button>
         <p>{this.props.count}</p>
         <Dialogues />
         <InputBox />

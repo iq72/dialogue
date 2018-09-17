@@ -9,6 +9,7 @@ class InputBox extends React.Component {
         let p=e.target
         let text=p.value
         console.log(text)
+        
     }
 
     // detectEnter = (e) =>{

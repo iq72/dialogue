@@ -3,11 +3,7 @@ const dialogues = (state=[],action) =>{
         case 'ADD_DIALOGUE':
             return [
                 ...state,
-                {
-                    actor:action.actor,
-                    act:action.act,
-                    text:action.text
-                }
+                action.dialogue
             ]
         default:
             return state
