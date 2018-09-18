@@ -32,21 +32,19 @@ class App extends Component {
       }
     );
   }
+  scrollDialogues=(e)=>{
+    console.log("scroll down")
+    // console.log(this.app);
+    window.scrollTo(0,document.body.scrollHeight);
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="App" ref={(div)=>{this.app=div}}>
         <button onClick={this.addDialogue}>custom</button>
         <button onClick={this.addDialogue}>shopkeeper</button>
-        <p>{this.props.count}</p>
         <Dialogues />
-        <InputBox />
+        <div className="App-white-space"></div>
+        <InputBox scrollDialogues={this.scrollDialogues}/>
       </div>
     );
   }

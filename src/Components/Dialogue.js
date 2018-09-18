@@ -1,25 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import Avatar from './Avatar'
 
-// const Name = styled.span`
-//     display:block;
-//     font-size:0.6rem;
-//     line-height:36px;
-//     color:#666
-// `
 const Block = styled.section`
     display:flex;
     flex-direction: ${props=>props.actor==='shopkeeper'?'row-reverse':'row'}
     margin:8px;
 `
-const Avatar = styled.span`
-    width: 32px;
-    height: 32px;
-    flex:none;
-    border-radius: 16px;
-    background-color: ${props=>props.actor==='shopkeeper'?'#09c6da':'#f582e1'}
-    
-`
+
 
 const Paragraph = styled.div`    
     min-height:32px;
@@ -46,16 +34,27 @@ const Paragraph = styled.div`
 
 `
 
-const Dialogue =({actor,text,act})=>(
-    <Block actor={actor}>
-        <Avatar actor={actor} />
-        <Paragraph actor={actor}>
-                <p>{text}</p>
-                {
-                    act&&<p>{act}</p>
-                }
-        </Paragraph>
-    </Block>
-)
+class Dialogue extends React.Component{
+    componentDidMount(){
+        //auto scroll to bottom 
+        window.scrollTo(0,document.body.scrollHeight);
+    }
+    render(){
+        return(
+            <div ref={(div)=>this.div=div}>
+            <Block actor={this.props.actor} >
+                <Avatar actor={this.props.actor} />
+                <Paragraph actor={this.props.actor}>
+                        <p>{this.props.text}</p>
+                        {
+                            this.props.act&&<p>{this.props.act}</p>
+                        }
+                </Paragraph>
+            </Block>
+            </div>
+        )
+    }
+}
+
 
 export default Dialogue

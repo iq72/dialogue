@@ -1,16 +1,24 @@
+let i=1
 
-
-export const switchDialogue = ()=>({
-    type: 'SWITCH_DIALOGUE',
-    payload: 'result_of_switch_dialogue' 
-})
-
+export const switchDialogue = ()=>{
+    i*=-1;
+    return({
+        type: 'SWITCH_DIALOGUE',
+        actor:i>0?'customer':'shopkeeper'
+    })
+}
 export const editText = (text)=>({
     type: 'EDIT_TEXT',
     text
 })
 
-export const addDialogue = (dialogue) =>({
-    type:'ADD_DIALOGUE',
-    dialogue
-})
+export const addDialogue = (dialogue) =>{
+    return (
+        {
+            type:'ADD_DIALOGUE',
+            dialogue:{
+                actor:i>0?'customer':'shopkeeper',
+                ...dialogue
+            }
+        }
+)}

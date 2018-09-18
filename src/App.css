@@ -1,5 +1,6 @@
 /* .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
 } */
 
 .App-logo {
@@ -20,6 +21,11 @@
 
 .App-intro {
   font-size: large;
+}
+
+.App-white-space {
+    min-height: 8em;
+    flex:1 1 auto;
 }
 
 @keyframes App-logo-spin {

@@ -1,21 +1,29 @@
 // import React from 'react'
 import { connect } from 'react-redux'
 import InputBox from '../Components/InputBox'
-import {addDialogue} from '../actions'
+import {addDialogue, switchDialogue} from '../actions'
 
 const mapStateToProps = (state)=>({
-    ...state
+    actor:state.avatar
 })
 
 const mapDispatchToProps = (dispatch)=>({
     detectEnter: (e)=>{
         if(13===e.keyCode){
-            console.log('switch')
-            dispatch(addDialogue({
-                actor:'customer',
-                text: e.target.value
-            }))
-            e.target.value=''
+            console.log('enter')
+            console.log(e.target.value)
+            if(e.target.value!=0){
+               
+                dispatch(addDialogue({
+                    // actor:'customer',
+                    text: e.target.value
+                }))
+                dispatch(switchDialogue())
+            }
+            e.target.blur();
+            e.target.value='';
+            e.target.style.height='2em';
+            e.target.focus();
         }
     }
 })
