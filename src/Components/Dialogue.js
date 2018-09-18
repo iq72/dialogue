@@ -24,20 +24,24 @@ const Avatar = styled.span`
 const Paragraph = styled.div`    
     min-height:32px;
     max-width:calc(100% - 96px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
     >p {
+        display:inline-flex;
         background-color:rgba(0,0,0,0.1);
         border-radius:32px;
-        // min-width:8ch; 
         padding:1em;
         margin:8px;
         word-break:break-all
     }
     >p:nth-child(2n) {
+        align-self:${props=>'shopkeeper'===props.actor?'flex-start':'flex-end'};
         color: #666;
         font-size: 0.8em;
         // margin-left:3em;
-        width:calc(100%-24px);
         background-color: rgba(0,0,0,0.05);
+
     }
 
 `
@@ -45,7 +49,7 @@ const Paragraph = styled.div`
 const Dialogue =({actor,text,act})=>(
     <Block actor={actor}>
         <Avatar actor={actor} />
-        <Paragraph>
+        <Paragraph actor={actor}>
                 <p>{text}</p>
                 {
                     act&&<p>{act}</p>
