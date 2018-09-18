@@ -26,7 +26,7 @@ const Paragraph = styled.div`
     max-width:calc(100% - 96px);
     display:flex;
     flex-direction:column;
-    align-items:flex-end;
+    align-items:${props=>'shopkeeper'===props.actor?'flex-end':'flex-start'};
     >p {
         display:inline-flex;
         background-color:rgba(0,0,0,0.1);

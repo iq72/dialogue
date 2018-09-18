@@ -8,7 +8,11 @@ import './App.css';
 import InputBox from './Containers/InputBox'
 import Dialogues from './Containers/Dialogues'
 
-
+let d= {
+  actor:'customer',
+  text: '有没有55寸的电视',
+  act:'进店有没有55有没有55有没有55有没有55有没有55寸'
+}
 
 const mapStateToProps = state => ({
   ...state
@@ -21,13 +25,12 @@ const mapStateToProps = state => ({
 class App extends Component {
 
   addDialogue=(event)=>{
-    let d= {
-      actor:'customer',
-      text: '有没有55寸的电视',
-      act:'进店'
-    }
-    d.actor=event.target.innerText;
-    this.props.addDialogue(d);
+      this.props.addDialogue(
+      {
+        ...d,
+        actor:event.target.innerText
+      }
+    );
   }
   render() {
     return (
