@@ -1,10 +1,10 @@
-const avatar=(state='customer',action)=>{
+const actor=(state='customer',action)=>{
     switch(action.type){
         case "SWITCH_DIALOGUE":
-            console.log (action)
+            console.log ("switch actor")
             return action.actor
         default:
             return state
     }
 }
-export default avatar
+export default actor

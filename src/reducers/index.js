@@ -1,11 +1,11 @@
 import { combineReducers }  from 'redux'
 import count from './count'
 import dialogues from './dialogues'
-import avatar from './avatar'
+import actor from './actor'
 
 
 export default combineReducers({
-    avatar,
+    actor,
     count,
     dialogues
 })

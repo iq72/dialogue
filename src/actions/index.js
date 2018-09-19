@@ -2,6 +2,7 @@ let i=1
 
 export const switchDialogue = ()=>{
     i*=-1;
+    console.log("action")
     return({
         type: 'SWITCH_DIALOGUE',
         actor:i>0?'customer':'shopkeeper'
