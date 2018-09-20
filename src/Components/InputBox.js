@@ -36,7 +36,7 @@ const Box = styled.div`
 
     >span:hover{
         cursor:pointer;
-        transform:scale(1.2)
+        // transform:scale(1.2)
     }
 `
 
