@@ -1,8 +1,16 @@
 let i=1
+let k=1
+
+export const switchMode = ()=>{
+    k*=-1
+    return({
+        type:'SWITCH_MODE',
+        mode:k>0?'dialogue':'act'
+    })
+}
 
 export const switchDialogue = ()=>{
     i*=-1;
-    console.log("action")
     return({
         type: 'SWITCH_DIALOGUE',
         actor:i>0?'customer':'shopkeeper'
@@ -13,13 +21,22 @@ export const editText = (text)=>({
     text
 })
 
-export const addDialogue = (dialogue) =>{
+export const addDialogue = (text) =>{
     return (
         {
             type:'ADD_DIALOGUE',
             dialogue:{
                 actor:i>0?'customer':'shopkeeper',
-                ...dialogue
+                text
             }
         }
 )}
+
+export const appendAct = (act) => {
+    return(
+        {
+            type:'APPEND_ACT',
+            act
+        }
+    )
+}

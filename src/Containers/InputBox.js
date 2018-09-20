@@ -1,33 +1,18 @@
 // import React from 'react'
 import { connect } from 'react-redux'
 import InputBox from '../Components/InputBox'
-import {addDialogue, switchDialogue} from '../actions'
+import {addDialogue, switchDialogue,switchMode,appendAct} from '../actions'
 
 const mapStateToProps = (state)=>({
-    actor:state.actor
+    actor:state.actor,
+    mode:state.mode
 })
 
 const mapDispatchToProps = (dispatch)=>({
-    detectEnter: (e)=>{
-        if(13===e.keyCode){
-            console.log('enter')
-            console.log(e.target.value)
-            e.preventDefault()
-            if(e.target.value!=0){
-                
-                dispatch(addDialogue({
-                    // actor:'customer',
-                    text: e.target.value
-                }))
-                dispatch(switchDialogue())
-            }
-            // e.target.blur();
-            e.target.value='';
-            e.target.style.height='2em';
-            // e.target.focus();
-        }
-    },
-    switchDialogue: ()=>{dispatch(switchDialogue())}
+    switchDialogue: ()=>{dispatch(switchDialogue())},
+    switchMode: ()=>{dispatch(switchMode())},
+    addDialogue:(dialogue)=>{dispatch(addDialogue(dialogue))},
+    appendAct: (act)=>{dispatch(appendAct(act))}
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(InputBox)
