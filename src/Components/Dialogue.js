@@ -27,7 +27,7 @@ const Paragraph = styled.div`
         margin:8px;
         word-break:break-all
     }
-    >p:nth-child(2n) {
+    >p.act {
         align-self:${props=>'shopkeeper'===props.actor?'flex-start':'flex-end'};
         color:rgba(0,0,0,0.75);
         font-size: 0.8em;
@@ -49,9 +49,10 @@ class Dialogue extends React.Component{
             <Block actor={this.props.actor} >
                 <Avatar actor={this.props.actor} />
                 <Paragraph actor={this.props.actor}>
-                        <p>{this.props.text}</p>
                         {
-                            this.props.act&&<p>{this.props.act}</p>
+                            this.props.contents.map(content=>(
+                                <p className={content.type}>{content.text}</p>
+                            ))
                         }
                 </Paragraph>
             </Block>

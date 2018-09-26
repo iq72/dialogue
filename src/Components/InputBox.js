@@ -57,6 +57,13 @@ const Box = styled.div`
 
 class InputBox extends React.Component{
     bs=0
+    switchBack = ()=>{
+        if(this.props.mode==='act'){
+            this.props.switchMode()
+        }else{
+            this.props.switchDialogue()
+        }
+    }
 
     onKeyDown= (e)=>{
         if(8===e.keyCode){//'backspace'
@@ -65,31 +72,41 @@ class InputBox extends React.Component{
             }
         }
         if(13===e.keyCode){//'enter'
-            if(e.shiftKey){
-                e.preventDefault();
-                if(this.props.mode==='dialogue'){// in dialogue mode
-                    this.props.addDialogue(e.target.value);
-                    this.props.switchMode();
-                }else{// act mode
-                    this.props.appendAct(e.target.value);
-                    this.props.switchMode();
-                    this.props.switchDialogue();
-                }
-            }else{
+            // if(e.shiftKey){
+            //     e.preventDefault();
+            //     if(this.props.mode==='dialogue'){// in dialogue mode
+            //         this.props.addDialogue({
+            //             actor:this.props.actor,
+            //             type:'talk',
+            //             text:e.target.value
+            //         });
+            //         this.props.switchMode();
+            //     }else{// act mode
+            //         this.props.addDialogue({
+            //             actor:this.props.actor,
+            //             type:'act',
+            //             text:e.target.value
+            //         });
+            //         this.props.switchMode();
+            //         this.props.switchDialogue();
+            //     }
+            // }else{
                 e.preventDefault();
                 if(e.target.value!=0){
-                    if(this.props.mode==='dialogue'){
-                        this.props.addDialogue( e.target.value);
-                        this.props.switchDialogue();
-                    }else{
-                        this.props.appendAct(e.target.value);
+                    this.props.addDialogue({
+                        actor:this.props.actor,
+                        type:this.props.mode,
+                        text:e.target.value
+                    });
+                    if(e.shiftKey){
                         this.props.switchMode();
-                        this.props.switchDialogue();
+                    }else{
+                        this.switchBack();
                     }
                 }else{//empty just switch 
-                    this.props.switchDialogue()
+                    this.switchBack()
                 }
-            }
+            // }
             e.target.value='';
             e.target.style.height='2em';
         }
@@ -141,7 +158,7 @@ class InputBox extends React.Component{
                 onScroll={(e)=>{
                     e.target.style.height=e.target.scrollHeight+'px' //auto resize textarea
                 }}
-                ref={(textarea)=>this.textarea=textarea}
+                // ref={(textarea)=>this.textarea=textarea}
             />
         </Box>
     )}

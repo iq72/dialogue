@@ -21,22 +21,14 @@ export const editText = (text)=>({
     text
 })
 
-export const addDialogue = (text) =>{
+export const addDialogue = (dialogue) =>{
     return (
         {
             type:'ADD_DIALOGUE',
+            actor:dialogue.actor,
             dialogue:{
-                actor:i>0?'customer':'shopkeeper',
-                text
+                type:dialogue.type,
+                text:dialogue.text
             }
         }
 )}
-
-export const appendAct = (act) => {
-    return(
-        {
-            type:'APPEND_ACT',
-            act
-        }
-    )
-}

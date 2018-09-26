@@ -1,28 +1,29 @@
 const dialogues = (state=[],action) =>{
     switch(action.type){
         case 'ADD_DIALOGUE':
-            return ([
-                ...state,
-                action.dialogue
-            ]);
+            let ns=[...state]; //create a new array
+            let dialogue=ns[ns.length-1];
+            if (dialogue&&dialogue.actor===action.actor){ // append dialogue
+                dialogue.contents.push(action.dialogue)
+            }else{ //new dialogue
+                ns.push({
+                    actor:action.actor,
+                    contents:[action.dialogue]
+                })
+            }
+            return ns;
         case 'APPEND_ACT':
-            let l=state.length;
-            return (state.map((dialogue,index)=>{
-                // if(index==0){
-                //     let d=dialogue
-                //     d.act=action.act
-                //     console.log (d)
-                //     return d
-                // }else{
-                //     return dialogue
-                // }
-                return (
-                    (index===l-1)?{
-                        ...dialogue,
-                        act:action.act
-                    }:dialogue
-                )
-            }));
+            let nas=[...state]; //create a new array
+            let dg=nas[nas.length-1];
+            if (dg&&dg.actor===action.actor){ // append dialogue
+                dg.content.push(action.dialogue)
+            }else{ //new dialogue
+                nas.push({
+                    actor:action.actor,
+                    content:[action.dialogue]
+                })
+            }
+        return nas;
         default:
             return state
     }
