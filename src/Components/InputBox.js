@@ -45,7 +45,8 @@ const Box = styled.div`
     width: calc(100% - 2em - 20px);
     left:8px;
     border-radius:32px;
-   
+    border:solid 1px rgba(0,0,0,0.06);
+
     background-color:white;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     
@@ -72,41 +73,25 @@ class InputBox extends React.Component{
             }
         }
         if(13===e.keyCode){//'enter'
-            // if(e.shiftKey){
-            //     e.preventDefault();
-            //     if(this.props.mode==='dialogue'){// in dialogue mode
-            //         this.props.addDialogue({
-            //             actor:this.props.actor,
-            //             type:'talk',
-            //             text:e.target.value
-            //         });
-            //         this.props.switchMode();
-            //     }else{// act mode
-            //         this.props.addDialogue({
-            //             actor:this.props.actor,
-            //             type:'act',
-            //             text:e.target.value
-            //         });
-            //         this.props.switchMode();
-            //         this.props.switchDialogue();
-            //     }
-            // }else{
-                e.preventDefault();
-                if(e.target.value!=0){
-                    this.props.addDialogue({
-                        actor:this.props.actor,
-                        type:this.props.mode,
-                        text:e.target.value
-                    });
-                    if(e.shiftKey){
+            e.preventDefault();
+            if(e.target.value!=0){
+                this.props.addDialogue({
+                    actor:this.props.actor,
+                    type:this.props.mode,
+                    text:e.target.value
+                });
+                if(e.shiftKey){
+                    if(this.props.mode==='talk'){
                         this.props.switchMode();
-                    }else{
-                        this.switchBack();
                     }
-                }else{//empty just switch 
-                    this.switchBack()
+                }else{
+                    this.switchBack();
                 }
-            // }
+            }else{//empty just switch 
+                this.switchBack()
+            }
+            
+          
             e.target.value='';
             e.target.style.height='2em';
         }
@@ -120,6 +105,13 @@ class InputBox extends React.Component{
                     this.props.switchMode()
                     this.bs=0
                 }
+            }
+        }
+        if(27===e.keyCode){
+            if(''===e.target.value){
+                this.props.mode==='act'&&this.props.switchMode()
+            }else{
+                e.target.value=''
             }
         }
     }

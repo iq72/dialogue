@@ -5,7 +5,7 @@ import Avatar from './Avatar'
 const Block = styled.section`
     display:flex;
     flex-direction: ${props=>props.actor==='shopkeeper'?'row-reverse':'row'}
-    margin:8px;
+    margin:8px 16px;
 `
 
 
@@ -15,6 +15,7 @@ const Paragraph = styled.div`
     display:flex;
     flex-direction:column;
     align-items:${props=>'shopkeeper'===props.actor?'flex-end':'flex-start'};
+
     >p {
         font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
@@ -24,11 +25,11 @@ const Paragraph = styled.div`
         background-color:rgba(0,0,0,0.08);
         border-radius:32px;
         padding:1em;
-        margin:8px;
+        margin:4px 8px;
         word-break:break-all
     }
     >p.act {
-        align-self:${props=>'shopkeeper'===props.actor?'flex-start':'flex-end'};
+        // align-self:${props=>'shopkeeper'===props.actor?'flex-start':'flex-end'};
         color:rgba(0,0,0,0.75);
         font-size: 0.8em;
         // margin-left:3em;
@@ -43,6 +44,10 @@ class Dialogue extends React.Component{
         //auto scroll to bottom 
         window.scrollTo(0,document.body.scrollHeight);
     }
+    componentDidUpdate(){
+        //auto scroll to bottom 
+        window.scrollTo(0,document.body.scrollHeight);
+    }
     render(){
         return(
             <div ref={(div)=>this.div=div}>
@@ -50,8 +55,8 @@ class Dialogue extends React.Component{
                 <Avatar actor={this.props.actor} />
                 <Paragraph actor={this.props.actor}>
                         {
-                            this.props.contents.map(content=>(
-                                <p className={content.type}>{content.text}</p>
+                            this.props.contents.map((content,index)=>(
+                                <p key={index} className={content.type}>{content.text}</p>
                             ))
                         }
                 </Paragraph>

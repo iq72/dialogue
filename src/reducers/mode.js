@@ -1,4 +1,4 @@
-const mode = (state='dialogue',action)=>{
+const mode = (state='talk',action)=>{
     switch (action.type){
         case 'SWITCH_MODE':
             return (

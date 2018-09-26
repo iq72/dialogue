@@ -5,7 +5,7 @@ export const switchMode = ()=>{
     k*=-1
     return({
         type:'SWITCH_MODE',
-        mode:k>0?'dialogue':'act'
+        mode:k>0?'talk':'act'
     })
 }
 
