@@ -16,8 +16,12 @@ const Paragraph = styled.div`
     flex-direction:column;
     align-items:${props=>'shopkeeper'===props.actor?'flex-end':'flex-start'};
     >p {
+        font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
         display:inline-flex;
-        background-color:rgba(0,0,0,0.1);
+        color:rgba(0,0,0,0.75);
+        background-color:rgba(0,0,0,0.08);
         border-radius:32px;
         padding:1em;
         margin:8px;
@@ -25,10 +29,10 @@ const Paragraph = styled.div`
     }
     >p:nth-child(2n) {
         align-self:${props=>'shopkeeper'===props.actor?'flex-start':'flex-end'};
-        color: #666;
+        color:rgba(0,0,0,0.75);
         font-size: 0.8em;
         // margin-left:3em;
-        background-color: rgba(0,0,0,0.05);
+        background-color: rgba(0,0,0,0.04);
 
     }
 

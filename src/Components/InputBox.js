@@ -5,7 +5,11 @@ import Avatar from './Avatar'
 const StyledInput = styled.textarea`
     height:2em;
     line-height:2;
-    font-size:1rem;
+    font-size:16px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+    color:rgba(0,0,0,0.8);
     overflow:auto;
     appearance:none;
     -webkit-appearance:none;
@@ -42,7 +46,7 @@ const Box = styled.div`
     left:8px;
     border-radius:32px;
    
-    // background-color:${props=>props.mode==='dialogue'?'rgba(0,0,0,0.1)':'rgba(0,0,0,0.05)'};
+    background-color:white;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     
     >span:hover{
@@ -81,9 +85,9 @@ class InputBox extends React.Component{
                 }else{//empty just switch 
                     this.props.switchDialogue()
                 }
-                e.target.value='';
-                e.target.style.height='2em';
             }
+            e.target.value='';
+            e.target.style.height='2em';
         }
     };
 
@@ -101,14 +105,14 @@ class InputBox extends React.Component{
                 this.props.mode==='act'&&
                 <span style={{
                     'display':'inline-block',
-                    'background-color': this.props.actor==='shopkeeper'?'#09c6da':'#f582e1',
-                    'border-radius': '4px 4px 0 4px',
+                    'backgroundColor': this.props.actor==='shopkeeper'?'#09c6da':'#f582e1',
+                    'borderRadius': '4px 4px 0 4px',
                     'color': 'white',
-                    'font-size': '0.4em',
-                    'font-weight': '600',
-                    'letter-spacing': '0.1em',
-                    'padding': '0 0.4em',
-                    'margin-left': '1em',
+                    'fontSize': '0.8em',
+                    'fontWeight': '600',
+                    'letterSpacing': '0.2em',
+                    'padding': '0.2em 0.6em',
+                    'marginLeft': '1em',
                     // 'opacity': '0.6'
                 }}>act</span>
             }
