@@ -56,10 +56,16 @@ const Box = styled.div`
 `
 
 class InputBox extends React.Component{
-    detectEnter= (e)=>{
-        if(13===e.keyCode){
+    bs=0
+
+    onKeyDown= (e)=>{
+        if(8===e.keyCode){//'backspace'
+            if(e.target.value!==''){
+                this.bs=1
+            }
+        }
+        if(13===e.keyCode){//'enter'
             if(e.shiftKey){
-                console.log("shift+enter")
                 e.preventDefault();
                 if(this.props.mode==='dialogue'){// in dialogue mode
                     this.props.addDialogue(e.target.value);
@@ -69,8 +75,6 @@ class InputBox extends React.Component{
                     this.props.switchMode();
                     this.props.switchDialogue();
                 }
-            }else if (e.ctrlKey){
-                console.log("control+enter")
             }else{
                 e.preventDefault();
                 if(e.target.value!=0){
@@ -90,6 +94,18 @@ class InputBox extends React.Component{
             e.target.style.height='2em';
         }
     };
+
+    onKeyUp = (e)=>{
+        if(8===e.keyCode){//'backspace'
+            if(''===e.target.value){
+                this.bs-=1
+                if(this.bs<0){
+                    this.props.switchMode()
+                    this.bs=0
+                }
+            }
+        }
+    }
 
     render(){
     return (
@@ -120,7 +136,8 @@ class InputBox extends React.Component{
                 placeholder='say something'
                 actor={this.props.actor} 
                 mode={this.props.mode}
-                onKeyDown={(e)=>{this.detectEnter(e)}} 
+                onKeyDown={(e)=>{this.onKeyDown(e)}}
+                onKeyUp={(e)=>{this.onKeyUp(e)}} 
                 onScroll={(e)=>{
                     e.target.style.height=e.target.scrollHeight+'px' //auto resize textarea
                 }}
