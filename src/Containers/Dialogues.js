@@ -13,9 +13,10 @@ const Dialogues = ({dialogues}) =>(
 )
 
 
-
 const mapStateToProps = state =>({
     dialogues : state.dialogues
 })
+
+
 
 export default connect(mapStateToProps)(Dialogues)

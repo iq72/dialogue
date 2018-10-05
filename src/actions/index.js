@@ -9,16 +9,30 @@ export const switchMode = ()=>{
     })
 }
 
-export const switchDialogue = ()=>{
-    i*=-1;
+export const switchDialogue = (step)=>{
+    i*=-(step||1);
     return({
         type: 'SWITCH_DIALOGUE',
         actor:i>0?'customer':'shopkeeper'
     })
 }
-export const editText = (text)=>({
-    type: 'EDIT_TEXT',
+export const changeText = (node)=>({
+    type: 'CHANGE_TEXT',
+    ...node
+})
+
+export const startEditing = (node)=>({
+    type: 'START_EDITING',
+    node
+})
+
+export const editing = (text)=>({
+    type: 'EDITING',
     text
+})
+
+export const clearText = ()=>({
+    type: 'CLEAR_TEXT'
 })
 
 export const addDialogue = (dialogue) =>{

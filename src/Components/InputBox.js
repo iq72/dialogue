@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Avatar from './Avatar'
 
-const StyledInput = styled.textarea`
+const StyledTextarea = styled.textarea`
     height:2em;
     line-height:2;
     font-size:16px;
@@ -67,51 +67,70 @@ class InputBox extends React.Component{
     }
 
     onKeyDown= (e)=>{
-        if(8===e.keyCode){//'backspace'
-            if(e.target.value!==''){
-                this.bs=1
-            }
-        }
-        if(13===e.keyCode){//'enter'
-            e.preventDefault();
-            if(e.target.value!=0){
-                this.props.addDialogue({
-                    actor:this.props.actor,
-                    type:this.props.mode,
-                    text:e.target.value
-                });
-                if(e.shiftKey){
-                    if(this.props.mode==='talk'){
-                        this.props.switchMode();
+        switch(this.props.type){
+            case 'add':
+                if(8===e.keyCode){//'backspace'
+                    if(e.target.value!==''){
+                        this.bs=1
                     }
-                }else{
-                    this.switchBack();
                 }
-            }else{//empty just switch 
-                this.switchBack()
-            }
-            
-          
-            e.target.value='';
-            e.target.style.height='2em';
+                if(13===e.keyCode){//'enter'
+                    e.preventDefault();
+                    if(e.target.value!=0){
+                        this.props.addDialogue({
+                            actor:this.props.actor,
+                            type:this.props.mode,
+                            text:e.target.value
+                        });
+                        if(e.shiftKey){//'shift enter' to change mode
+                            if(this.props.mode==='talk'){
+                                this.props.switchMode();
+                            }
+                        }else{
+                            this.switchBack();
+                        }
+                    }else{//empty just switch 
+                        this.switchBack()
+                    }
+                    this.props.clearText();
+                    e.target.style.height='2em';
+                }
+                break;
+            case 'edit':
+                if(13===e.keyCode){//'enter'
+                    e.preventDefault();
+                    this.props.changeText({
+                        dKey:this.props.dKey,
+                        cKey:this.props.cKey,
+                        text:this.props.text
+                    })
+                    this.props.switchDialogue(-1);
+                    this.props.clearText();
+                    e.target.style.height='2em';
+                }
+                break;
+            default:
+                return
         }
     };
 
     onKeyUp = (e)=>{
-        if(8===e.keyCode){//'backspace'
-            if(''===e.target.value){
-                this.bs-=1
-                if(this.bs<0){
-                    this.props.switchMode()
-                    this.bs=0
+        if('add'===this.props.type){
+            if(8===e.keyCode){//'backspace' change mode
+                if(''===e.target.value){
+                    this.bs-=1
+                    if(this.bs<0){
+                        this.props.switchMode()
+                        this.bs=0
+                    }
                 }
             }
-        }
-        if(27===e.keyCode){
-            if(''===e.target.value){
-                this.props.mode==='act'&&this.props.switchMode()
-            }else{
-                e.target.value=''
+            if(27===e.keyCode){// 'esc' empty textarea
+                if(''===e.target.value){
+                    this.props.mode==='act'&&this.props.switchMode()
+                }else{
+                    this.props.clearText();
+                }
             }
         }
     }
@@ -119,13 +138,14 @@ class InputBox extends React.Component{
     render(){
     return (
         <Box mode={this.props.mode}>
+            {'add'===this.props.type&&
             <Avatar 
                 actor={this.props.actor} 
                 onClick={(e)=>{
                     e.preventDefault();
                     this.props.switchDialogue()
                 }}
-            />
+            />}
             {
                 this.props.mode==='act'&&
                 <span style={{
@@ -141,7 +161,8 @@ class InputBox extends React.Component{
                     // 'opacity': '0.6'
                 }}>act</span>
             }
-            <StyledInput 
+            <StyledTextarea 
+                value={this.props.text}
                 placeholder='say something'
                 actor={this.props.actor} 
                 mode={this.props.mode}
@@ -150,8 +171,8 @@ class InputBox extends React.Component{
                 onScroll={(e)=>{
                     e.target.style.height=e.target.scrollHeight+'px' //auto resize textarea
                 }}
-                // ref={(textarea)=>this.textarea=textarea}
-            />
+                onChange={(e)=>{this.props.editing(e.target.value)}}
+            ></StyledTextarea>
         </Box>
     )}
 

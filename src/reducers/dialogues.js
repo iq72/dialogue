@@ -24,6 +24,19 @@ const dialogues = (state=[],action) =>{
                 })
             }
         return nas;
+        case 'CHANGE_TEXT':
+            console.log('redux change_text')
+            return state.map((dialogue,index)=>{
+                if(action.dKey===index){
+                    let nd={
+                        ...dialogue
+                    };
+                    nd.contents[action.cKey].text=action.text;
+                    return nd;
+                }else{
+                    return dialogue;
+                }
+            })
         default:
             return state
     }

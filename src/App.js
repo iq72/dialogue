@@ -14,7 +14,7 @@ class App extends Component {
       <div className="App" ref={(div)=>{this.app=div}}>
         <Dialogues />
         <div className="App-white-space"></div>
-        <InputBox scrollDialogues={this.scrollDialogues} />
+        <InputBox scrollDialogues={this.scrollDialogues} type='add'/>
       </div>
     );
   }
