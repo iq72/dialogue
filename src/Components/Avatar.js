@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 const Avatar = styled.span`
     display:block;
-    width: 32px;
-    height: 32px;
+    width: 10px;
+    height: 10px;
     flex:none;
-    border-radius: 16px;
+    border-radius: 5px;
     background-color: ${props=>props.actor==='shopkeeper'?'#09c6da':'#f582e1'}
     
 `

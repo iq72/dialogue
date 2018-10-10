@@ -5,40 +5,20 @@ import SingleP from '../Containers/SingleP'
 
 const Block = styled.section`
     display:flex;
-    flex-direction: ${props=>props.actor==='shopkeeper'?'row-reverse':'row'}
+    // flex-direction: ${props=>props.actor==='shopkeeper'?'row-reverse':'row'};
+    flex-direction:row;
+    align-items:baseline;
     margin:8px 16px;
 `
 
-// const SP = styled.p`
-//     font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-//     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-//     "Droid Sans", "Helvetica Neue", sans-serif;
-//     display:inline-flex;
-//     color:rgba(0,0,0,0.75);
-//     font-size:${props=>props.type==='act'?'0.8em':'1em'};
-//     background-color:${props=>props.type==='act'?'rgba(0,0,0,0.08)':'rgba(0,0,0,0.04)'};
-//     border-radius:32px;
-//     padding:1em;
-//     margin:4px 8px;
-//     word-break:break-all;
-// `
-
-
 const SDiv = styled.div`    
-    min-height:32px;
-    max-width:calc(100% - 96px);
+    // min-height:32px;
+    // max-width:calc(100% - 6ch);
+    max-width:960px;
     display:flex;
     flex-direction:column;
-    align-items:${props=>'shopkeeper'===props.actor?'flex-end':'flex-start'};
-    // >p.act {
-    //     // align-self:${props=>'shopkeeper'===props.actor?'flex-start':'flex-end'};
-    //     color:rgba(0,0,0,0.75);
-    //     font-size: 0.8em;
-    //     // margin-left:3em;
-    //     background-color: rgba(0,0,0,0.04);
-
-    // }
-
+    // align-items:${props=>'shopkeeper'===props.actor?'flex-end':'flex-start'};
+    alig-items:flex-start;
 `
 
 class Dialogue extends React.Component{

@@ -7,12 +7,28 @@ const SP = styled.p`
     "Droid Sans", "Helvetica Neue", sans-serif;
     display:inline-flex;
     color:rgba(0,0,0,0.75);
-    font-size:${props=>props.type==='act'?'0.8em':'1em'};
-    background-color:${props=>props.type==='act'?'rgba(0,0,0,0.08)':'rgba(0,0,0,0.04)'};
-    border-radius:32px;
-    padding:1em;
-    margin:4px 8px;
+    // font-size:${props=>props.type==='act'?'0.875em':'1em'};
+    font-size:1rem;
+    font-weight:300;
+    line-height:1.5;
+    // background-color:${props=>props.type==='act'?'rgba(0,0,0,0.08)':'rgba(0,0,0,0.04)'};
+    background-color:none;
+    // border-radius:32px;
+    // padding:1em;
+    margin:0 8px;
     word-break:break-all;
+    ${props=>{
+        if('act'===props.type){
+            return(`
+                padding-left: 18px;
+                border-left: solid 3px rgba(0,0,0,0.4);
+                font-style:italic;
+                color:rgba(0,0,0,0.6);
+                margin: 4px 8px;
+            `)
+        }
+    }}
+    text-align:justify;
 `
 
 export default class SingleP extends React.Component{
