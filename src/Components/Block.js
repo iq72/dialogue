@@ -7,6 +7,7 @@ const Block = styled.section`
     flex-direction:row;
     align-items:flex-start;
     margin:${props=>props.mode==='edit'?'0 ':'0.5rem 1rem'};
+    clear:both;
 `
 
 export default Block
