@@ -41,15 +41,16 @@ const dialogues = (state=[],action) =>{
         case 'START_EDITING':
             console.log('reducer START_EDITING');
             return state.map((dialogue,index)=>{
-                if(action.node.dKey===index){
-                    let nc={ ...dialogue };
-                    nc.contents[action.node.cKey].editing= true;
-                    return nc;
-                }else{
-                    let nc={ ...dialogue };
-                    nc.contents[action.node.cKey].editing= false;
-                    return nc;
+                let nc={ ...dialogue };
+                if(nc.contents.length>0){
+                    nc.contents.map((item)=>{ //all editing set to false
+                        item.editing=false
+                    });
                 }
+                if(action.node.dKey===index){
+                    nc.contents[action.node.cKey].editing= true;
+                }
+                return nc;
             })
         default:
             return state

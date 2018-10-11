@@ -5,7 +5,6 @@ import Block from './Block'
 
 
 const StyledTextarea = styled.textarea`
-    // height:2em;
     line-height:1.5;
     font-size:1rem;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -18,8 +17,8 @@ const StyledTextarea = styled.textarea`
     -webkit-appearance:none;
     resize:none;
     margin: 0 0.5em;
+    width:100%;
     flex:1 1 auto;
-    // border:solid;
     border-color:${props=>props.actor==='shopkeeper'?'#09c6da':'#f582e1'};
     border-width:0;
     padding:0;
@@ -64,8 +63,6 @@ class InputBox extends React.Component{
 
     componentDidMount(){
         //auto focus
-        // this.textarea.focus()
-        console.log(this.textarea)
         this.textarea.focus()
     }
 
@@ -87,7 +84,7 @@ class InputBox extends React.Component{
                 }
                 if(13===e.keyCode){//'enter'
                     e.preventDefault();
-                    if(e.target.value!=0){
+                    if(e.target.value!=0){//has text
                         this.props.addDialogue({
                             actor:this.props.actor,
                             type:this.props.type,

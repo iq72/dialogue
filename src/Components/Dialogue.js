@@ -17,11 +17,11 @@ import Block from './Block'
 const SDiv = styled.div`    
     // min-height:32px;
     // max-width:calc(100% - 6ch);
-    max-width:960px;
-    display:flex;
-    flex-direction:column;
+    // display:flex;
+    // flex-direction:column;
     // align-items:${props=>'shopkeeper'===props.actor?'flex-end':'flex-start'};
-    alig-items:flex-start;
+    // alig-items:flex-start;
+    width:100%;
 `
 
 class Dialogue extends React.Component{

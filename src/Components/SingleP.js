@@ -5,7 +5,7 @@ const SP = styled.p`
     font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
-    display:inline-flex;
+    // display:inline-flex;
     color:rgba(0,0,0,0.75);
     // font-size:${props=>props.type==='act'?'0.875em':'1em'};
     font-size:1rem;
@@ -17,6 +17,8 @@ const SP = styled.p`
     // padding:1em;
     margin:0 0.5rem;
     word-break:break-all;
+    float:left;
+    clear:both;
     ${props=>{
         if('act'===props.type){
             return(`

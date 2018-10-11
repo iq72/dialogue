@@ -7,6 +7,7 @@ const Avatar = styled.span`
     height: 10px;
     flex:none;
     border-radius: 5px;
+    margin-top:0.5rem;
     background-color: ${props=>props.actor==='shopkeeper'?'#09c6da':'#f582e1'}
     
 `
