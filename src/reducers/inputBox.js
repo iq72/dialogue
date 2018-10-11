@@ -1,3 +1,10 @@
+let actors=[
+    'customer',
+    'shopkeeper'
+    ];
+let i=0;
+
+
 const inputBox=(state={
     type:'talk',
     actor:'customer',
@@ -5,10 +12,21 @@ const inputBox=(state={
 }, action)=>{
     switch(action.type){
         case "SWITCH_DIALOGUE":
+            let actor=state.preActor?state.preActor:action.actor;
+            if (typeof(actor) ==='string'){
+                // na=actor;
+                i=actors.indexOf(actor)
+            }else if (typeof(actor)==='number'){
+                i=(actor+i)%actors.length;
+                actor=actors[i]
+            }else{
+                i=(i+1)%actors.length;
+                actor=actors[i]
+            }
             return ({
                 ...state,
                 mode:'add',
-                actor:state.preActor?state.preActor:action.actor,
+                actor:actor,
                 preActor:undefined
             });
         case 'SWITCH_TYPE':

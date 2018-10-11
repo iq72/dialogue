@@ -1,9 +1,6 @@
-let i=0
+// let i=0
 let k=1
-let actors=[
-    'customer',
-    'shopkeeper'
-    ]
+
 
 export const switchType = ()=>{
     k*=-1
@@ -14,20 +11,10 @@ export const switchType = ()=>{
 }
 
 export const switchDialogue = (actor)=>{
-    // let na;
-    if (typeof(actor) ==='string'){
-        // na=actor;
-        i=actors.indexOf(actor)
-    }else if (typeof(actor)==='number'){
-        i=(actor+i)%actors.length;
-        actor=actors[i]
-    }else{
-        i=(i+1)%actors.length;
-        actor=actors[i]
-    }
+
     return({
         type: 'SWITCH_DIALOGUE',
-        actor:actor
+        actor
     })
 }
 export const changeText = (node)=>({
