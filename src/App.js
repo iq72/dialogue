@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import InputBox from './Containers/InputBox'
+import AddInput from './Containers/AddInput'
 import Dialogues from './Containers/Dialogues'
 
 class App extends Component {
@@ -17,9 +17,7 @@ class App extends Component {
       >
         <Dialogues />
         {/* <div className="App-white-space"></div> */}
-        <InputBox 
-        // scrollDialogues={this.scrollDialogues} 
-        type='add'/>
+        <AddInput />
       </div>
     );
   }

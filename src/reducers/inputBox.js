@@ -1,28 +1,28 @@
 const inputBox=(state={
-    type:'add',
+    type:'talk',
     actor:'customer',
-    mode:'talk'
+    mode:'add'
 }, action)=>{
     switch(action.type){
         case "SWITCH_DIALOGUE":
             return ({
                 ...state,
-                type:'add',
+                mode:'add',
                 actor:action.actor
             });
-        case 'SWITCH_MODE':
+        case 'SWITCH_TYPE':
             return ({
                 ...state,
-                mode:action.mode
+                type:action.t
             });
-        // case 'START_EDITING':
-        //     console.log("editing")
-        //     return({
-        //         ...state,
-        //         type:'edit',
-        //         actor:'',
-        //         ...action.node
-        //     })
+        case 'START_EDITING':
+            console.log("editing")
+            return({
+                ...state,
+                mode:'edit',
+                actor:'',
+                ...action.node
+            })
         case 'EDITING':
             return({
                 ...state,

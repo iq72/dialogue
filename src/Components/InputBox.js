@@ -21,7 +21,7 @@ const StyledTextarea = styled.textarea`
     border-width:0;
     background:none;
     ${props=>{
-        if (props.mode==='act'){
+        if (props.type==='act'){
             return(
                 `
                 // border-bottom-width: 2px ;
@@ -58,15 +58,15 @@ const Box = styled.div`
 class InputBox extends React.Component{
     bs=0
     switchBack = ()=>{
-        if(this.props.mode==='act'){
-            this.props.switchMode()
+        if(this.props.type==='act'){
+            this.props.switchType()
         }else{
             this.props.switchDialogue(1)
         }
     }
 
     onKeyDown= (e)=>{
-        switch(this.props.type){
+        switch(this.props.mode){
             case 'add':
                 if(8===e.keyCode){//'backspace'
                     if(e.target.value!==''){
@@ -78,12 +78,12 @@ class InputBox extends React.Component{
                     if(e.target.value!=0){
                         this.props.addDialogue({
                             actor:this.props.actor,
-                            type:this.props.mode,
+                            type:this.props.type,
                             text:e.target.value
                         });
-                        if(e.shiftKey){//'shift enter' to change mode
-                            if(this.props.mode==='talk'){
-                                this.props.switchMode();
+                        if(e.shiftKey){//'shift enter' to change type
+                            if(this.props.type==='talk'){
+                                this.props.switchType();
                             }
                         }else{
                             this.switchBack();
@@ -114,19 +114,19 @@ class InputBox extends React.Component{
     };
 
     onKeyUp = (e)=>{
-        if('add'===this.props.type){
-            if(8===e.keyCode){//'backspace' change mode
+        if('add'===this.props.mode){
+            if(8===e.keyCode){//'backspace' change type
                 if(''===e.target.value){
                     this.bs-=1
                     if(this.bs<0){
-                        this.props.switchMode()
+                        this.props.switchType()
                         this.bs=0
                     }
                 }
             }
             if(27===e.keyCode){// 'esc' empty textarea
                 if(''===e.target.value){
-                    this.props.mode==='act'&&this.props.switchMode()
+                    this.props.type==='act'&&this.props.switchType()
                 }else{
                     this.props.clearText();
                 }
@@ -137,7 +137,7 @@ class InputBox extends React.Component{
     render(){
     return (
         <Box mode={this.props.mode}>
-            {'add'===this.props.type&&
+            {'add'===this.props.mode&&
             <Avatar 
                 actor={this.props.actor} 
                 onClick={(e)=>{
@@ -146,7 +146,7 @@ class InputBox extends React.Component{
                 }}
             />}
             {
-                this.props.mode==='act'&&
+                this.props.type==='act'&&
                 <span style={{
                     'display':'inline-block',
                     'backgroundColor': this.props.actor==='shopkeeper'?'#09c6da':'#f582e1',

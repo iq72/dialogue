@@ -5,11 +5,11 @@ let actors=[
     'shopkeeper'
     ]
 
-export const switchMode = ()=>{
+export const switchType = ()=>{
     k*=-1
     return({
-        type:'SWITCH_MODE',
-        mode:k>0?'talk':'act'
+        type:'SWITCH_TYPE',
+        t:k>0?'talk':'act'
     })
 }
 
