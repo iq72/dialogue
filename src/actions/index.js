@@ -32,12 +32,12 @@ export const switchDialogue = (actor)=>{
 }
 export const changeText = (node)=>({
     type: 'CHANGE_TEXT',
-    ...node
+    node
 })
 
 export const startEditing = (node)=>({
     type: 'START_EDITING',
-    ...node
+    node
 })
 
 export const editing = (text)=>({

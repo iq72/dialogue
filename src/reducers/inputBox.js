@@ -8,7 +8,8 @@ const inputBox=(state={
             return ({
                 ...state,
                 mode:'add',
-                actor:action.actor
+                actor:state.preActor?state.preActor:action.actor,
+                preActor:undefined
             });
         case 'SWITCH_TYPE':
             return ({
@@ -21,6 +22,7 @@ const inputBox=(state={
                 ...state,
                 mode:'edit',
                 actor:'',
+                preActor:state.actor,
                 ...action.node
             })
         case 'EDITING':

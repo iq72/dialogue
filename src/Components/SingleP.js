@@ -34,7 +34,7 @@ const SP = styled.p`
 export default class SingleP extends React.Component{
     
     onClick(e){
-        console.log("clicked")
+        console.log("clicked \n "+e.target.innerText)
         this.props.startEditing({
             dKey:this.props.dKey,
             cKey:this.props.cKey,

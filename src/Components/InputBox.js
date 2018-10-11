@@ -61,6 +61,14 @@ const StyledTextarea = styled.textarea`
 
 class InputBox extends React.Component{
     bs=0
+
+    componentDidMount(){
+        //auto focus
+        // this.textarea.focus()
+        console.log(this.textarea)
+        this.textarea.focus()
+    }
+
     switchBack = ()=>{
         if(this.props.type==='act'){
             this.props.switchType()
@@ -166,6 +174,7 @@ class InputBox extends React.Component{
             }
             <StyledTextarea 
                 value={this.props.text}
+                innerRef={(textarea)=>this.textarea=textarea}
                 placeholder='say something'
                 actor={this.props.actor} 
                 mode={this.props.mode}

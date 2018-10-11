@@ -27,11 +27,12 @@ const dialogues = (state=[],action) =>{
         case 'CHANGE_TEXT':
             console.log('redux change_text')
             return state.map((dialogue,index)=>{
-                if(action.dKey===index){
+                if(action.node.dKey===index){
                     let nd={
                         ...dialogue
                     };
-                    nd.contents[action.cKey].text=action.text;
+                    nd.contents[action.node.cKey].text=action.node.text;
+                    nd.contents[action.node.cKey].editing=false;
                     return nd;
                 }else{
                     return dialogue;
@@ -40,12 +41,14 @@ const dialogues = (state=[],action) =>{
         case 'START_EDITING':
             console.log('reducer START_EDITING');
             return state.map((dialogue,index)=>{
-                if(action.dKey===index){
+                if(action.node.dKey===index){
                     let nc={ ...dialogue };
-                    nc.contents[action.cKey].editing= true;
+                    nc.contents[action.node.cKey].editing= true;
                     return nc;
                 }else{
-                    return dialogue;
+                    let nc={ ...dialogue };
+                    nc.contents[action.node.cKey].editing= false;
+                    return nc;
                 }
             })
         default:
