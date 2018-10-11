@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import Avatar from './Avatar'
 import SingleP from '../Containers/SingleP'
+import InputBox from '../Containers/InputBox'
+
+
 
 const Block = styled.section`
     display:flex;
@@ -41,6 +44,8 @@ class Dialogue extends React.Component{
                 <SDiv actor={this.props.actor}>
                         {
                             this.props.contents.map((content,index)=>(
+                                content.editing?
+                                <InputBox key={index} type='edit' actor={this.props.actor}/>:
                                 <SingleP key={index} type={content.type} dKey={parseInt(this._reactInternalFiber.key)} cKey={index}>{content.text}</SingleP>
                             ))
                         }

@@ -15,14 +15,14 @@ const inputBox=(state={
                 ...state,
                 mode:action.mode
             });
-        case 'START_EDITING':
-            console.log("editing")
-            return({
-                ...state,
-                type:'edit',
-                actor:'',
-                ...action.node
-            })
+        // case 'START_EDITING':
+        //     console.log("editing")
+        //     return({
+        //         ...state,
+        //         type:'edit',
+        //         actor:'',
+        //         ...action.node
+        //     })
         case 'EDITING':
             return({
                 ...state,

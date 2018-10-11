@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import Avatar from './Avatar'
 
 const StyledTextarea = styled.textarea`
-    height:2em;
-    line-height:2;
-    font-size:16px;
+    // height:2em;
+    line-height:1.5;
+    font-size:1rem;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
@@ -24,7 +24,7 @@ const StyledTextarea = styled.textarea`
         if (props.mode==='act'){
             return(
                 `
-                border-bottom-width: 2px ;
+                // border-bottom-width: 2px ;
                 margin-left:0;
                 padding-left:1em;
                 `
@@ -38,17 +38,16 @@ const StyledTextarea = styled.textarea`
 
 const Box = styled.div`
     display:flex;
-    align-items:flex-end;
-    position:fixed;
+    align-items:baseline;
+    // position:fixed;
     padding:1em;
-    bottom:1em;
+    // bottom:1em;
     width: calc(100% - 2em - 20px);
-    left:8px;
-    border-radius:32px;
-    border:solid 1px rgba(0,0,0,0.06);
-
-    background-color:white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    // left:8px;
+    // border-radius:32px;
+    // border:solid 1px rgba(0,0,0,0.06);
+    // background-color:white;
+    // box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     
     >span:hover{
         cursor:pointer;
@@ -62,7 +61,7 @@ class InputBox extends React.Component{
         if(this.props.mode==='act'){
             this.props.switchMode()
         }else{
-            this.props.switchDialogue()
+            this.props.switchDialogue(1)
         }
     }
 

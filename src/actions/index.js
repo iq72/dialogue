@@ -1,5 +1,9 @@
-let i=1
+let i=0
 let k=1
+let actors=[
+    'customer',
+    'shopkeeper'
+    ]
 
 export const switchMode = ()=>{
     k*=-1
@@ -9,11 +13,21 @@ export const switchMode = ()=>{
     })
 }
 
-export const switchDialogue = (step)=>{
-    i*=-(step||1);
+export const switchDialogue = (actor)=>{
+    // let na;
+    if (typeof(actor) ==='string'){
+        // na=actor;
+        i=actors.indexOf(actor)
+    }else if (typeof(actor)==='number'){
+        i=(actor+i)%actors.length;
+        actor=actors[i]
+    }else{
+        i=(i+1)%actors.length;
+        actor=actors[i]
+    }
     return({
         type: 'SWITCH_DIALOGUE',
-        actor:i>0?'customer':'shopkeeper'
+        actor:actor
     })
 }
 export const changeText = (node)=>({
@@ -23,7 +37,7 @@ export const changeText = (node)=>({
 
 export const startEditing = (node)=>({
     type: 'START_EDITING',
-    node
+    ...node
 })
 
 export const editing = (text)=>({
@@ -42,6 +56,7 @@ export const addDialogue = (dialogue) =>{
             actor:dialogue.actor,
             dialogue:{
                 type:dialogue.type,
+                editing:false,
                 text:dialogue.text
             }
         }

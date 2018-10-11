@@ -37,6 +37,17 @@ const dialogues = (state=[],action) =>{
                     return dialogue;
                 }
             })
+        case 'START_EDITING':
+            console.log('reducer START_EDITING');
+            return state.map((dialogue,index)=>{
+                if(action.dKey===index){
+                    let nc={ ...dialogue };
+                    nc.contents[action.cKey].editing= true;
+                    return nc;
+                }else{
+                    return dialogue;
+                }
+            })
         default:
             return state
     }
