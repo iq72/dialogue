@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import Avatar from './Avatar'
+import Block from './Block'
+
 
 const StyledTextarea = styled.textarea`
     // height:2em;
@@ -9,16 +11,18 @@ const StyledTextarea = styled.textarea`
     font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight:300;
     color:rgba(0,0,0,0.8);
     overflow:auto;
     appearance:none;
     -webkit-appearance:none;
     resize:none;
-    margin: 0 1em;
+    margin: 0 0.5em;
     flex:1 1 auto;
     // border:solid;
     border-color:${props=>props.actor==='shopkeeper'?'#09c6da':'#f582e1'};
     border-width:0;
+    padding:0;
     background:none;
     ${props=>{
         if (props.type==='act'){
@@ -36,24 +40,24 @@ const StyledTextarea = styled.textarea`
     
 `
 
-const Box = styled.div`
-    display:flex;
-    align-items:baseline;
-    // position:fixed;
-    padding:1em;
-    // bottom:1em;
-    width: calc(100% - 2em - 20px);
-    // left:8px;
-    // border-radius:32px;
-    // border:solid 1px rgba(0,0,0,0.06);
-    // background-color:white;
-    // box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+// const Box = styled.div`
+//     display:flex;
+//     align-items:baseline;
+//     // position:fixed;
+//     padding:1em;
+//     // bottom:1em;
+//     width: calc(100% - 2em - 20px);
+//     // left:8px;
+//     // border-radius:32px;
+//     // border:solid 1px rgba(0,0,0,0.06);
+//     // background-color:white;
+//     // box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     
-    >span:hover{
-        cursor:pointer;
-        // transform:scale(1.2)
-    }
-`
+//     >span:hover{
+//         cursor:pointer;
+//         // transform:scale(1.2)
+//     }
+// `
 
 class InputBox extends React.Component{
     bs=0
@@ -136,7 +140,7 @@ class InputBox extends React.Component{
 
     render(){
     return (
-        <Box mode={this.props.mode}>
+        <Block mode={this.props.mode}>
             {'add'===this.props.mode&&
             <Avatar 
                 actor={this.props.actor} 
@@ -172,7 +176,7 @@ class InputBox extends React.Component{
                 }}
                 onChange={(e)=>{this.props.editing(e.target.value)}}
             ></StyledTextarea>
-        </Box>
+        </Block>
     )}
 
 }

@@ -15,7 +15,7 @@ const SP = styled.p`
     background-color:none;
     // border-radius:32px;
     // padding:1em;
-    margin:0 8px;
+    margin:0 0.5rem;
     word-break:break-all;
     ${props=>{
         if('act'===props.type){

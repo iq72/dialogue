@@ -3,16 +3,16 @@ import styled from 'styled-components'
 import Avatar from './Avatar'
 import SingleP from '../Containers/SingleP'
 import InputBox from '../Containers/InputBox'
+import Block from './Block'
 
 
-
-const Block = styled.section`
-    display:flex;
-    // flex-direction: ${props=>props.actor==='shopkeeper'?'row-reverse':'row'};
-    flex-direction:row;
-    align-items:baseline;
-    margin:8px 16px;
-`
+// const Block = styled.section`
+//     display:flex;
+//     // flex-direction: ${props=>props.actor==='shopkeeper'?'row-reverse':'row'};
+//     flex-direction:row;
+//     align-items:baseline;
+//     margin:8px 16px;
+// `
 
 const SDiv = styled.div`    
     // min-height:32px;
