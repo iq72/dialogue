@@ -10,7 +10,7 @@ const StyledTextarea = styled.textarea`
     font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
-    font-weight:300;
+    font-weight:400;
     color:rgba(0,0,0,0.8);
     overflow:auto;
     appearance:none;
@@ -145,15 +145,19 @@ class InputBox extends React.Component{
 
     render(){
     return (
-        <Block mode={this.props.mode}>
-            {'add'===this.props.mode&&
+        <Block 
+            mode={this.props.mode}
+            actor={this.props.actor} 
+            bc={this.props.actor==='shopkeeper'?'#09c6da':'#f582e1'}
+        >
+            {/* {'add'===this.props.mode&&
             <Avatar 
                 actor={this.props.actor} 
                 onClick={(e)=>{
                     e.preventDefault();
                     this.props.switchDialogue()
                 }}
-            />}
+            />} */}
             {
                 this.props.type==='act'&&
                 <span style={{

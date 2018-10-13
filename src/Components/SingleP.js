@@ -8,8 +8,8 @@ const SP = styled.p`
     // display:inline-flex;
     color:rgba(0,0,0,0.75);
     // font-size:${props=>props.type==='act'?'0.875em':'1em'};
-    font-size:1rem;
-    font-weight:300;
+    font-size:1em;
+    font-weight:400;
     line-height:1.5;
     // background-color:${props=>props.type==='act'?'rgba(0,0,0,0.08)':'rgba(0,0,0,0.04)'};
     background-color:none;
@@ -22,11 +22,19 @@ const SP = styled.p`
     ${props=>{
         if('act'===props.type){
             return(`
-                padding-left: 18px;
-                border-left: solid 3px rgba(0,0,0,0.4);
-                font-style:italic;
+                font-size:0.875em;
                 color:rgba(0,0,0,0.6);
-                margin: 4px 8px;
+                ::before{
+                    content: "act";
+                    margin-right: 0.5rem;
+                    padding: 0 0.5em;
+                    display: inline-block;
+                    background-color: rgba(0, 0, 0, 0.1);
+                    color: rgba(0, 0, 0, 0.6);
+                    font-size: 0.5em;
+                    font-weight: 400;
+                    letter-spacing: 2px;
+                }
             `)
         }
     }}

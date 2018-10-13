@@ -22,6 +22,9 @@ const SDiv = styled.div`
     // align-items:${props=>'shopkeeper'===props.actor?'flex-end':'flex-start'};
     // alig-items:flex-start;
     width:100%;
+    border-left-width:4px;
+    border-left-style:solid;
+    border-left-color:${props=>props.actor==='shopkeeper'?'#09c6da':'#f582e1'};
 `
 
 class Dialogue extends React.Component{
@@ -40,7 +43,7 @@ class Dialogue extends React.Component{
         return(
             // <div ref={(div)=>this.div=div}>
             <Block actor={this.props.actor} >
-                <Avatar actor={this.props.actor} />
+                {/* <Avatar actor={this.props.actor} /> */}
                 <SDiv actor={this.props.actor}>
                         {
                             this.props.contents.map((content,index)=>(
