@@ -6,12 +6,12 @@ import Block from './Block'
 
 const StyledTextarea = styled.textarea`
     line-height:1.5;
-    font-size:1rem;
+    font-size:${props=>props.type==='talk'?'1rem':'0.875rem'};
     font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight:400;
-    color:rgba(0,0,0,0.8);
+    color:${props=>props.type==='talk'?'rgba(0,0,0,0.8)':'rgba(0,0,0,0.6)'};
     overflow:auto;
     appearance:none;
     -webkit-appearance:none;
@@ -23,16 +23,6 @@ const StyledTextarea = styled.textarea`
     border-width:0;
     padding:0;
     background:none;
-    ${props=>{
-        if (props.type==='act'){
-            return(
-                `
-                // border-bottom-width: 2px ;
-                margin-left:0;
-                padding-left:1em;
-                `
-            )
-        }}}
     :focus {
         outline: none
     }
@@ -101,7 +91,7 @@ class InputBox extends React.Component{
                         this.switchBack()
                     }
                     this.props.clearText();
-                    e.target.style.height='2em';
+                    e.target.style.height='1.5em';
                 }
                 break;
             case 'edit':
@@ -114,7 +104,7 @@ class InputBox extends React.Component{
                     })
                     this.props.switchDialogue(-1);
                     this.props.clearText();
-                    e.target.style.height='2em';
+                    e.target.style.height='1.5em';
                 }
                 break;
             default:
@@ -161,15 +151,15 @@ class InputBox extends React.Component{
                 this.props.type==='act'&&
                 <span style={{
                     'display':'inline-block',
-                    'backgroundColor': this.props.actor==='shopkeeper'?'#09c6da':'#f582e1',
-                    'borderRadius': '4px 4px 0 4px',
-                    'color': 'white',
-                    'fontSize': '0.8em',
-                    'fontWeight': '600',
-                    'letterSpacing': '0.2em',
-                    'padding': '0.2em 0.6em',
-                    'marginLeft': '1em',
-                    // 'opacity': '0.6'
+                    // 'backgroundColor': this.props.actor==='shopkeeper'?'#09c6da':'#f582e1',
+                    'backgroundColor': 'rgba(0,0,0,0.1)',
+                    'color': 'rgba(0,0,0,0.8)',
+                    'fontSize': '0.5em',
+                    'fontWeight': '400',
+                    'letterSpacing': '2px',
+                    'padding': '0 0.5em',
+                    'margin': '0 0 0 0.5rem',
+                    'opacity': '0.8'
                 }}>act</span>
             }
             <StyledTextarea 
@@ -178,12 +168,14 @@ class InputBox extends React.Component{
                 placeholder='say something'
                 actor={this.props.actor} 
                 mode={this.props.mode}
+                type={this.props.type}
                 onKeyDown={(e)=>{this.onKeyDown(e)}}
                 onKeyUp={(e)=>{this.onKeyUp(e)}} 
                 onScroll={(e)=>{
                     e.target.style.height=e.target.scrollHeight+'px' //auto resize textarea
                 }}
                 onChange={(e)=>{this.props.editing(e.target.value)}}
+                rows={'1'}
             ></StyledTextarea>
         </Block>
     )}
