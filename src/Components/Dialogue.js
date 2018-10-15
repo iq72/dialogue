@@ -4,6 +4,7 @@ import Avatar from './Avatar'
 import SingleP from '../Containers/SingleP'
 import InputBox from '../Containers/InputBox'
 import Block from './Block'
+import AddInput from '../Containers/AddInput';
 
 
 // const Block = styled.section`
@@ -44,15 +45,15 @@ class Dialogue extends React.Component{
             // <div ref={(div)=>this.div=div}>
             <Block actor={this.props.actor} >
                 {/* <Avatar actor={this.props.actor} /> */}
-                <SDiv actor={this.props.actor}>
+                {/* <SDiv actor={this.props.actor}> */}
                         {
                             this.props.contents.map((content,index)=>(
                                 content.editing?
                                 <InputBox key={index} type='edit' actor={this.props.actor}/>:
-                                <SingleP key={index} type={content.type} dKey={parseInt(this._reactInternalFiber.key)} cKey={index}>{content.text}</SingleP>
+                                <SingleP key={index} type={content.type} dKey={parseInt(this._reactInternalFiber.key,10)} cKey={index}>{content.text}</SingleP>
                             ))
                         }
-                </SDiv>
+                {/* </SDiv> */}
             </Block>
             // </div>
         )

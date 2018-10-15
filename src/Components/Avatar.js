@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 
 const Avatar = styled.span`
-    display:block;
+    display:inline-block;
     width: 10px;
     height: 10px;
     flex:none;

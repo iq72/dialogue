@@ -17,7 +17,7 @@ class App extends Component {
       >
         <Dialogues />
         {/* <div className="App-white-space"></div> */}
-        <AddInput />
+        {/* <AddInput /> */}
       </div>
     );
   }
