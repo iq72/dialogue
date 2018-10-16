@@ -158,7 +158,8 @@ class InputBox extends React.Component{
                     'fontWeight': '400',
                     'letterSpacing': '2px',
                     'padding': '0 0.5em',
-                    'margin': '0 0 0 0.5rem',
+                    'margin': '3px 0 0 0.5rem',
+                    'height':'18px',
                     'opacity': '0.8'
                 }}>act</span>
             }
