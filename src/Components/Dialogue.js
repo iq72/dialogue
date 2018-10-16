@@ -29,14 +29,7 @@ const SDiv = styled.div`
 `
 
 class Dialogue extends React.Component{
-    componentDidMount(){
-        //auto scroll to bottom 
-        window.scrollTo(0,document.body.scrollHeight);
-    }
-    componentDidUpdate(){
-        //auto scroll to bottom 
-        window.scrollTo(0,document.body.scrollHeight);
-    }
+    
     onClick=(e)=>{
         console.log("get clicked")
     }

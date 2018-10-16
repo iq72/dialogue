@@ -53,7 +53,19 @@ class InputBox extends React.Component{
 
     componentDidMount(){
         //auto focus
-        this.textarea.focus()
+        console.log("mounted");
+        this.textarea.focus();
+    }
+
+    componentDidUpdate(){//keep textbox in viewport
+        console.log("updated");
+        this.textarea.focus();
+        let bottom = this.textarea.offsetTop+this.textarea.offsetHeight;
+        let viewBottom = window.pageYOffset + window.innerHeight ;
+        if(viewBottom<bottom){
+            console.log("bellow");
+            window.scrollTo(0,bottom+(3*this.textarea.offsetHeight)-window.innerHeight)
+        }
     }
 
     switchBack = ()=>{
