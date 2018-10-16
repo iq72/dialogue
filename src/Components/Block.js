@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const Block = styled.section`
     // width:100%;
+    padding:0;
     display:${props=>props.mode==='add'?'flex':'block'};
     max-width:960px;
     // flex-direction:row;
@@ -10,6 +11,7 @@ const Block = styled.section`
     clear:both;
     border-left : solid 4px;
     border-left-color:${props=>props.actor==='shopkeeper'?'#09c6da':'#f582e1'};
+    ${props=>props.mode==='edit'&&'border-left : none'};
 `
 
 export default Block

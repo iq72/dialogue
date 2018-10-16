@@ -11,13 +11,14 @@ const StyledTextarea = styled.textarea`
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight:400;
+    text-align:justify;
     color:${props=>props.type==='talk'?'rgba(0,0,0,0.8)':'rgba(0,0,0,0.6)'};
     overflow:auto;
     appearance:none;
     -webkit-appearance:none;
     resize:none;
     margin: 0 0.5em;
-    width:100%;
+    width:calc(100% - 1em);
     flex:1 1 auto;
     border-color:${props=>props.actor==='shopkeeper'?'#09c6da':'#f582e1'};
     border-width:0;
@@ -28,25 +29,6 @@ const StyledTextarea = styled.textarea`
     }
     
 `
-
-// const Box = styled.div`
-//     display:flex;
-//     align-items:baseline;
-//     // position:fixed;
-//     padding:1em;
-//     // bottom:1em;
-//     width: calc(100% - 2em - 20px);
-//     // left:8px;
-//     // border-radius:32px;
-//     // border:solid 1px rgba(0,0,0,0.06);
-//     // background-color:white;
-//     // box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    
-//     >span:hover{
-//         cursor:pointer;
-//         // transform:scale(1.2)
-//     }
-// `
 
 class InputBox extends React.Component{
     bs=0
