@@ -17,6 +17,7 @@ export default class SingleP extends React.Component{
         this.props.startEditing({
             dKey:this.props.dKey,
             cKey:this.props.cKey,
+            type:this.props.type,
             text:e.target.innerText
         })
         document.querySelector('textarea').focus()
