@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const Block = styled.section`
     // width:100%;
     padding:0;
-    display:${props=>props.mode==='add'?'flex':'block'};
+    // display:${props=>props.mode==='add'?'flex':'block'};
     max-width:960px;
     // flex-direction:row;
     // align-items:flex-start;

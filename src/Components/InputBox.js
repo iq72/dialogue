@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Avatar from './Avatar'
 import Block from './Block'
-
+import PureContainer from './PureContainer'
 
 const StyledTextarea = styled.textarea`
     line-height:1.5;
@@ -129,23 +129,11 @@ class InputBox extends React.Component{
 
     render(){
     return (
-        <Block 
-            mode={this.props.mode}
-            actor={this.props.actor} 
-        >
-            {/* {'add'===this.props.mode&&
-            <Avatar 
-                actor={this.props.actor} 
-                onClick={(e)=>{
-                    e.preventDefault();
-                    this.props.switchDialogue()
-                }}
-            />} */}
+        <PureContainer>
             {
                 this.props.type==='act'&&
                 <span style={{
                     'display':'inline-block',
-                    // 'backgroundColor': this.props.actor==='shopkeeper'?'#09c6da':'#f582e1',
                     'backgroundColor': 'rgba(0,0,0,0.1)',
                     'color': 'rgba(0,0,0,0.8)',
                     'fontSize': '0.5em',
@@ -172,7 +160,8 @@ class InputBox extends React.Component{
                 onChange={(e)=>{this.props.editing(e.target.value)}}
                 rows={'1'}
             ></StyledTextarea>
-        </Block>
+        </PureContainer>
+
     )}
 
 }
