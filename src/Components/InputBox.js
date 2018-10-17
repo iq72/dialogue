@@ -18,7 +18,7 @@ const StyledTextarea = styled.textarea`
     -webkit-appearance:none;
     resize:none;
     margin: 0 0.5em;
-    width:calc(100% - 1em);
+    // width:calc(100% - 1em);
     flex:1 1 auto;
     border-color:${props=>props.actor==='shopkeeper'?'#09c6da':'#f582e1'};
     border-width:0;
@@ -129,7 +129,7 @@ class InputBox extends React.Component{
 
     render(){
     return (
-        <PureContainer>
+        <PureContainer style={{'display':'flex'}}>
             {
                 this.props.type==='act'&&
                 <span style={{

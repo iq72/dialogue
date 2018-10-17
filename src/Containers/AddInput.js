@@ -12,7 +12,7 @@ const AddInput = ({actor,mode})=>(
 )
 
 const mapStateToProps = ({inputBox})=>({
-    acotr:inputBox.acotr,
+    actor:inputBox.actor,
     mode:inputBox.mode
 })
 
