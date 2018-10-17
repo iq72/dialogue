@@ -9,7 +9,7 @@ import configureStore from './store';
 // import thunk from 'redux-thunk'
 
 // import rootReducer from './reducers'
-// import switchDialogue from './reducers/switchDialogue'
+// import switchActor from './reducers/switchActor'
 
 import './index.css';
 import App from './App';

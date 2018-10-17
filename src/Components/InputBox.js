@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Avatar from './Avatar'
-import Block from './Block'
 import PureContainer from './PureContainer'
 
 const StyledTextarea = styled.textarea`
@@ -35,17 +33,14 @@ class InputBox extends React.Component{
 
     componentDidMount(){
         //auto focus
-        console.log("mounted");
         this.textarea.focus();
     }
 
     componentDidUpdate(){//keep textbox in viewport
-        console.log("updated");
         this.textarea.focus();
         let bottom = this.textarea.offsetTop+this.textarea.offsetHeight;
         let viewBottom = window.pageYOffset + window.innerHeight ;
         if(viewBottom<bottom){
-            console.log("bellow");
             window.scrollTo(0,bottom+(3*this.textarea.offsetHeight)-window.innerHeight)
         }
     }
@@ -54,7 +49,7 @@ class InputBox extends React.Component{
         if(this.props.type==='act'){
             this.props.switchType()
         }else{
-            this.props.switchDialogue(1)
+            this.props.switchActor(1)
         }
     }
 
@@ -68,35 +63,34 @@ class InputBox extends React.Component{
                 }
                 if(13===e.keyCode){//'enter'
                     e.preventDefault();
-                    if(e.target.value!=0){//has text
-                        this.props.addDialogue({
-                            actor:this.props.actor,
-                            type:this.props.type,
-                            text:e.target.value
-                        });
-                        if(e.shiftKey){//'shift enter' to change type
-                            if(this.props.type==='talk'){
-                                this.props.switchType();
-                            }
-                        }else{
-                            this.switchBack();
+                    this.props.addDialogue({
+                        actor:this.props.actor,
+                        type:this.props.type,
+                        text:e.target.value
+                    });
+                    
+                    if(e.shiftKey){//'shift enter' to change type
+                        if(this.props.type==='talk'){
+                            this.props.switchType();
                         }
-                    }else{//empty just switch 
-                        this.switchBack()
+                    }else{
+                        this.switchBack();
                     }
+                 
                     this.props.clearText();
                     e.target.style.height='1.5em';
                 }
                 break;
             case 'edit':
-                if(13===e.keyCode){//'enter'
+                if(13===e.keyCode){//'enter
                     e.preventDefault();
                     this.props.changeText({
                         dKey:this.props.dKey,
                         cKey:this.props.cKey,
                         text:this.props.text
                     })
-                    this.props.switchDialogue(-1);
+                    this.props.switchType();
+                    this.props.switchActor();
                     this.props.clearText();
                     e.target.style.height='1.5em';
                 }

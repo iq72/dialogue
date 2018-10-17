@@ -10,14 +10,14 @@ export const switchType = ()=>{
     })
 }
 
-export const switchDialogue = (actor)=>{
+export const switchActor = (actor)=>{
 
     return({
-        type: 'SWITCH_DIALOGUE',
+        type: 'SWITCH_ACTOR',
         actor
     })
 }
-export const changeText = (node)=>({
+export const changeText = (node)=>({//change text of content
     type: 'CHANGE_TEXT',
     node
 })

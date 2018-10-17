@@ -11,10 +11,9 @@ const inputBox=(state={
     mode:'add'
 }, action)=>{
     switch(action.type){
-        case "SWITCH_DIALOGUE":
-            let actor=state.preActor?state.preActor:action.actor;
+        case "SWITCH_ACTOR":
+            let actor=state.preActor||action.actor;
             if (typeof(actor) ==='string'){
-                // na=actor;
                 i=actors.indexOf(actor)
             }else if (typeof(actor)==='number'){
                 i=(actor+i)%actors.length;
@@ -30,17 +29,19 @@ const inputBox=(state={
                 preActor:undefined
             });
         case 'SWITCH_TYPE':
+            let t=state.preType||action.t;
             return ({
                 ...state,
-                type:action.t
+                type:t,
+                preType:undefined
             });
         case 'START_EDITING':
-            console.log("editing")
             return({
                 ...state,
                 mode:'edit',
                 actor:'',
                 preActor:state.actor,
+                preType:state.type,
                 ...action.node
             })
         case 'EDITING':

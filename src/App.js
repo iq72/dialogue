@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import AddInput from './Containers/AddInput'
 import Dialogues from './Containers/Dialogues'
 
 class App extends Component {

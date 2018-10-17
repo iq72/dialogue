@@ -1,6 +1,6 @@
 const actor=(state='customer',action)=>{
     switch(action.type){
-        case "SWITCH_DIALOGUE":
+        case "SWITCH_ACTOR":
             return action.actor
         default:
             return state

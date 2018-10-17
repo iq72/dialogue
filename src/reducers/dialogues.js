@@ -1,6 +1,35 @@
+const deletItemFromArray =(array, item)=>{
+    array.splice(array.indexOf(item));
+}
+
+const deleteEmpty = (array) =>{
+    let d,i,item,m=array.length-1;
+    while(m>-1){
+         d=array[m].contents;
+         i=d.length-1;
+        while(i>-1){
+            item=d[i]
+            if(!item.editing&&item.text==0&&item.text!=='0'){
+                d.splice(i,1);
+            }
+
+        i--;}
+
+        if (d.length<1){ 
+            array.splice(m,1);
+        }
+
+    m--;}
+
+    return array;
+}
+
 const dialogues = (state=[],action) =>{
     switch(action.type){
         case 'ADD_DIALOGUE':
+            if(action.dialogue.text==0&&action.dialogue.text!=='0'){//text is empty, do nothing
+                return state;
+            }
             let ns=[...state]; //create a new array
             let dialogue=ns[ns.length-1];
             if (dialogue&&dialogue.actor===action.actor){ // append dialogue
@@ -12,21 +41,8 @@ const dialogues = (state=[],action) =>{
                 })
             }
             return ns;
-        case 'APPEND_ACT':
-            let nas=[...state]; //create a new array
-            let dg=nas[nas.length-1];
-            if (dg&&dg.actor===action.actor){ // append dialogue
-                dg.content.push(action.dialogue)
-            }else{ //new dialogue
-                nas.push({
-                    actor:action.actor,
-                    content:[action.dialogue]
-                })
-            }
-        return nas;
         case 'CHANGE_TEXT':
-            console.log('redux change_text')
-            return state.map((dialogue,index)=>{
+            let dialogues = state.map((dialogue,index)=>{
                 if(action.node.dKey===index){
                     let nd={
                         ...dialogue
@@ -37,9 +53,10 @@ const dialogues = (state=[],action) =>{
                 }else{
                     return dialogue;
                 }
-            })
-        case 'START_EDITING':
-            console.log('reducer START_EDITING');
+            });
+            return (deleteEmpty(dialogues)); // delete empty items
+
+            case 'START_EDITING':
             return state.map((dialogue,index)=>{
                 let nc={ ...dialogue };
                 if(nc.contents.length>0){
