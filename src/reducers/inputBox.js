@@ -47,18 +47,19 @@ const inputBox=(state={
                 actor:'',
                 // preActor:state.actor,
                 // preType:state.type,
-                ...action.node
+                type:action.node.type,
+                text:action.node.text
             })
-        case 'INSERT_AT':
-            return(action.mode==='content'?{
-                ...state,
-                cKey:action.cKey+1,
-                dKey:action.dKey
-            }:{
-                ...state,
-                cKey:0,
-                dKey:action.dKey+1
-            })
+        // case 'INSERT_AT':
+        //     return(action.mode==='content'?{
+        //         ...state,
+        //         cKey:action.cKey+1,
+        //         dKey:action.dKey
+        //     }:{
+        //         ...state,
+        //         cKey:0,
+        //         dKey:action.dKey+1
+        //     })
         case 'EDITING':
             return({
                 ...state,

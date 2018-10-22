@@ -2,6 +2,10 @@ const deletItemFromArray =(array, item)=>{
     array.splice(array.indexOf(item));
 }
 
+let cKeyMinus = []
+let cKeyMinusRecords = []
+let dKeyMinusRecords = []
+
 const deleteEmpty = (array) =>{
     let d,i,item,m=array.length-1;
     while(m>-1){
@@ -9,19 +13,29 @@ const deleteEmpty = (array) =>{
          i=d.length-1;
         while(i>-1){
             item=d[i]
-            if(!item.mode!=='text'&&item.text.match(/^\s*$/)){//dumb text, and empty
-                console.log('empty')
+            if(item.mode!=='insert'&&item.text.match(/^\s*$/)){//dumb text, and empty
+                console.log('minus c')
                 d.splice(i,1);
+                cKeyMinus.push(i);
             }
 
         i--;}
 
+        if(cKeyMinus.length>0){
+            cKeyMinusRecords.push({
+                dKey:m,
+                cKeyMinus:cKeyMinus
+            })
+            cKeyMinus=[];
+        }
+
         if (d.length<1){ 
             array.splice(m,1);
+            console.log('minus d')
+            dKeyMinusRecords.push(m) ;
         }
 
     m--;}
-    console.log(array)
     return array;
 }
 
@@ -77,10 +91,30 @@ const dialogues = (state=[],action) =>{
             }
             return nds;
         case 'INSERT_AT':
-            if(action.mode==='content'){
+            // adjust keys if dialogues has deleted some empty items
+            let cKey=action.cKey;
+            let dKey=action.dKey;
+            cKeyMinusRecords.forEach((record)=>{  
+                if(action.dKey===record.dKey){ // cKey matters only  if it's in the same dialgoue
+                    record.cKeyMinus.forEach((c)=>{ // and if it's  before action.cKey
+                        if(c<=action.cKey){
+                            cKey--;
+                        }
+                    })     
+                }
+            })
+            dKeyMinusRecords.forEach((dKeyMinus)=>{
+                if(dKeyMinus<=action.dKey){     // dKey matters only  if it's before action.dKey
+                    dKey --;
+                }
+            })
+            cKeyMinusRecords=[];
+            dKeyMinusRecords=[];
+
+            if(action.mode==='content'){ // just insert contents
                 return state.map((dialogue,index)=>{
-                    if(action.dKey===index){
-                        dialogue.contents.splice(action.cKey+1,0,{
+                    if(dKey===index){
+                        dialogue.contents.splice(cKey+1,0,{
                             mode:'insert',
                             text:'',
                             type:'talk'
@@ -90,22 +124,34 @@ const dialogues = (state=[],action) =>{
                 });
             }else{
                 let nts = [...state];
-                let cs = nts[action.dKey].contents;
-                if (cs.length-1>action.cKey){ // insert in the middle of contents 
-                    let sc = cs.splice(action.cKey+1,(cs.length-action.cKey-1)); //split it
-                    nts.splice(action.dKey+1,0,{              // and add a new  contents array to dialogue
-                        actor:nts[action.dKey].actor,
-                        contents:sc
+                if (dKey<nts.length-1){//insert in the middle of dialogues
+                    let cs = nts[dKey].contents;
+                    if (cs.length-1>cKey){ // insert in the middle of contents 
+                        let sc = cs.splice(cKey+1,(cs.length-cKey-1)); //split it
+                        nts.splice(dKey+1,0,{              // and add a new  contents array to dialogue
+                            actor:nts[dKey].actor,
+                            contents:sc
+                        })
+                    }
+                
+                    nts.splice(dKey+1,0,{  // insert Inputbox
+                        actor:action.actor,
+                        contents:[{
+                            mode:'insert',
+                            text:'',
+                            type:'talk'
+                        }]
+                    })
+                }else{//push new dialogue
+                    nts.push({
+                        actor:action.actor,
+                        contents:[{
+                            mode:'insert',
+                            text:'',
+                            type:'talk'
+                        }]
                     })
                 }
-                nts.splice(action.dKey+1,0,{  // insert Inputbox
-                    actor:action.actor,
-                    contents:[{
-                        mode:'insert',
-                        text:'',
-                        type:'talk'
-                    }]
-                })
                 return nts
             }
         case 'CHANGE_TEXT':
