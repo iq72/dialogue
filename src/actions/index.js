@@ -17,6 +17,21 @@ export const switchActor = (actor)=>{
         actor
     })
 }
+
+export const switchMode = (mode) =>{
+    return({
+        type: 'SWITCH_MODE',
+        mode
+    })
+}
+
+export const insertAt = (obj)=>{
+    return({
+        type:'INSERT_AT',
+        ...obj
+    })
+}
+
 export const changeText = (node)=>({//change text of content
     type: 'CHANGE_TEXT',
     node
@@ -27,7 +42,7 @@ export const startEditing = (node)=>({
     node
 })
 
-export const editing = (text)=>({
+export const edit = (text)=>({
     type: 'EDITING',
     text
 })
@@ -41,10 +56,26 @@ export const addDialogue = (dialogue) =>{
         {
             type:'ADD_DIALOGUE',
             actor:dialogue.actor,
-            dialogue:{
+            content:{
                 type:dialogue.type,
-                editing:false,
+                mode:'text',
                 text:dialogue.text
             }
         }
 )}
+
+export const insertDialogue = (dialogue) =>{
+    return(
+        {
+            type:'INSERT_DIALOGUE',
+            actor:dialogue.actor,
+            cKey:dialogue.cKey,
+            dKey:dialogue.dKey,
+            content:{
+                type:dialogue.type,
+                mode:'text',
+                text:dialogue.text
+            }
+        }
+    )
+}

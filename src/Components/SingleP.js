@@ -17,7 +17,7 @@ export default class SingleP extends React.Component{
             type:this.props.type,
             text:e.target.innerText
         })
-        document.querySelector('textarea').focus()
+        // document.querySelector('textarea').focus()
     }
     render(){
         return (

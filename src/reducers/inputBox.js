@@ -24,7 +24,7 @@ const inputBox=(state={
             }
             return ({
                 ...state,
-                mode:'add',
+                // mode:'add',
                 actor:actor,
                 preActor:undefined
             });
@@ -35,6 +35,11 @@ const inputBox=(state={
                 type:t,
                 preType:undefined
             });
+        case 'SWITCH_MODE':
+            return({
+                ...state,
+                mode:action.mode
+            })
         case 'START_EDITING':
             return({
                 ...state,
@@ -43,6 +48,12 @@ const inputBox=(state={
                 preActor:state.actor,
                 preType:state.type,
                 ...action.node
+            })
+        case 'INSERT_AT':
+            return({
+                ...state,
+                cKey:action.cKey,
+                dKey:action.dKey
             })
         case 'EDITING':
             return({

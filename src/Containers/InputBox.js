@@ -1,7 +1,7 @@
 // import React from 'react'
 import { connect } from 'react-redux'
 import InputBox from '../Components/InputBox'
-import {addDialogue, switchActor,switchType,changeText,editing,clearText} from '../actions'
+import {addDialogue,insertDialogue,insertAt,switchMode, switchActor,switchType,changeText,edit,clearText} from '../actions'
 
 const mapStateToProps = (state)=>({
     ...state.inputBox
@@ -10,9 +10,12 @@ const mapStateToProps = (state)=>({
 const mapDispatchToProps = (dispatch)=>({
     switchActor: (step)=>{dispatch(switchActor(step))},
     switchType: ()=>{dispatch(switchType())},
+    switchMode: (mode)=>{dispatch(switchMode(mode))},
+    insertAt: (pos)=>{dispatch(insertAt(pos))},
     addDialogue:(dialogue)=>{dispatch(addDialogue(dialogue))},
+    insertDialogue:(dialogue)=>{dispatch(insertDialogue(dialogue))},
     changeText:(node)=>{dispatch(changeText(node))},
-    editing:(text)=>{dispatch(editing(text))},
+    edit:(text)=>{dispatch(edit(text))},
     clearText:()=>{dispatch(clearText())}
 })
 

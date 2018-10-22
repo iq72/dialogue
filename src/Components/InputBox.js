@@ -46,14 +46,32 @@ class InputBox extends React.Component{
     }
 
     switchBack = ()=>{
-        if(this.props.type==='act'){
+        if(this.props.type==='act'){//'act' switch to 'talk'
             this.props.switchType()
-        }else{
-            this.props.switchActor(1)
+        }else if(this.props.mode==='edit'){//not 'act' but 'edit', switch to 'insert'
+            this.props.switchMode('insert')
+            this.props.insertAt({
+                mode:'content',
+                cKey:this.props.cKey +1 ,
+                dKey:this.props.dKey
+            });
+        }else if(this.props.mode==='insert'){//not 'act' but 'insert', insert in next line
+            this.props.insertAt({
+                mode:'dialogue',
+                actor:this.props.actor==='customer'?'shopkeeper':'customer',
+                cKey:0,
+                dKey:this.props.dKey+1
+            });
+            this.props.switchActor();
+        }else{//'add'
+            this.props.switchActor();
         }
     }
 
     onKeyDown= (e)=>{
+        //if text is empty, switchBack
+
+
         switch(this.props.mode){
             case 'add':
                 if(8===e.keyCode){//'backspace'
@@ -80,7 +98,7 @@ class InputBox extends React.Component{
                     this.props.clearText();
                     e.target.style.height='1.5em';
                 }
-                break;
+            break;
             case 'edit':
                 if(13===e.keyCode){//'enter
                     e.preventDefault();
@@ -89,12 +107,46 @@ class InputBox extends React.Component{
                         cKey:this.props.cKey,
                         text:this.props.text
                     })
-                    this.props.switchType();
-                    this.props.switchActor();
+                    // this.props.switchType();
+                    // this.props.switchActor();
+
+                    this.switchBack();
                     this.props.clearText();
                     e.target.style.height='1.5em';
                 }
-                break;
+            break;
+            case 'insert':
+                if(8===e.keyCode){//'backspace'
+                if(e.target.value!==''){
+                        this.bs=1
+                    }
+                }
+                if(13===e.keyCode){//'enter'
+                    e.preventDefault();
+                    // if(this.props.text==0&&this.props.text!=='0'){//if empty
+                    //     this.props.switchActor();
+                    //     return
+                    // }
+                    this.props.changeText({
+                        actor:this.props.actor,
+                        type:this.props.type,
+                        dKey:this.props.dKey,
+                        cKey:this.props.cKey,
+                        text:this.props.text
+                    });
+                    
+                    if(e.shiftKey){//'shift enter' to change type
+                        if(this.props.type==='talk'){
+                            this.props.switchType();
+                        }
+                    }else{
+                        this.switchBack();
+                    }
+                
+                    this.props.clearText();
+                    e.target.style.height='1.5em';
+                }
+            break;
             default:
                 return
         }
@@ -151,7 +203,7 @@ class InputBox extends React.Component{
                 onScroll={(e)=>{
                     e.target.style.height=e.target.scrollHeight+'px' //auto resize textarea
                 }}
-                onChange={(e)=>{this.props.editing(e.target.value)}}
+                onChange={(e)=>{this.props.edit(e.target.value)}}
                 rows={'1'}
             ></StyledTextarea>
         </PureContainer>

@@ -13,8 +13,11 @@ class Dialogue extends React.Component{
             <Block actor={this.props.actor} >
                         {
                             this.props.contents.map((content,index)=>(
-                                content.editing?
-                                <InputBox key={index} mode='edit' actor={this.props.actor}/>:
+                                content.mode==='edit'?
+                                <InputBox key={index} mode='edit'
+                                />:content.mode==='insert'?
+                                <InputBox key={index} mode='insert' 
+                                />:
                                 <SingleP key={index} type={content.type} dKey={parseInt(this._reactInternalFiber.key,10)} cKey={index}>{content.text}</SingleP>
                             ))
                         }
