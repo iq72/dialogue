@@ -52,15 +52,15 @@ class InputBox extends React.Component{
             this.props.switchMode('insert')
             this.props.insertAt({
                 mode:'content',
-                cKey:this.props.cKey +1 ,
+                cKey:this.props.cKey,
                 dKey:this.props.dKey
             });
         }else if(this.props.mode==='insert'){//not 'act' but 'insert', insert in next line
             this.props.insertAt({
                 mode:'dialogue',
                 actor:this.props.actor==='customer'?'shopkeeper':'customer',
-                cKey:0,
-                dKey:this.props.dKey+1
+                cKey:this.props.cKey,
+                dKey:this.props.dKey
             });
             this.props.switchActor();
         }else{//'add'

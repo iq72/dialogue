@@ -51,11 +51,12 @@ export const clearText = ()=>({
     type: 'CLEAR_TEXT'
 })
 
-export const addDialogue = (dialogue) =>{
+export const addDialogue = (dialogue,pos) =>{
     return (
         {
             type:'ADD_DIALOGUE',
             actor:dialogue.actor,
+            pos:pos,
             content:{
                 type:dialogue.type,
                 mode:'text',

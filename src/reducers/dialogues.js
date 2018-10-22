@@ -24,16 +24,38 @@ const deleteEmpty = (array) =>{
     return array;
 }
 
+const deleteAt = (array,index)=>{
+    if(array.length>index){
+        array.splice(index,1);
+        // return array;
+    }else{
+        console.log(`
+            ERROR: index ${index} is out of range
+        `)
+    }
+}
+
+const addAt = (array, item, index)=>{
+    if(index&&(array.length-1)>index){ // add in middle
+        array.splice(index,0,item);
+    }else{ // add to end
+        array.push(DataTransferItem)
+    }
+    // return array;
+}
+
+
 const dialogues = (state=[],action) =>{
     switch(action.type){
         case 'ADD_DIALOGUE':
             if(action.content.text==0&&action.content.text!=='0'){//text is empty, do nothing
                 return state;
             }
+
             let ns=[...state]; //create a new array
             let dialogue=ns[ns.length-1];
-            if (dialogue&&dialogue.actor===action.actor){ // append dialogue
-                dialogue.contents.push(action.content)
+            if (dialogue&&dialogue.actor===action.actor){ // push dialogue
+                dialogue.contents.push(action.content);
             }else{ //new dialogue
                 ns.push({
                     actor:action.actor,
@@ -56,7 +78,7 @@ const dialogues = (state=[],action) =>{
             if(action.mode==='content'){
                 return state.map((dialogue,index)=>{
                     if(action.dKey===index){
-                        dialogue.contents.splice(action.cKey,0,{
+                        dialogue.contents.splice(action.cKey+1,0,{
                             mode:'insert',
                             text:'',
                             type:'talk'
@@ -65,8 +87,16 @@ const dialogues = (state=[],action) =>{
                     return dialogue    
                 });
             }else{
-                let nts = [...state]
-                nts.splice(action.dKey,0,{
+                let nts = [...state];
+                let cs = nts[action.dKey].contents;
+                if (cs.length-1>action.cKey){ // insert in the middle of contents 
+                    let sc = cs.splice(action.cKey+1,(cs.length-action.cKey-1)); //split it
+                    nts.splice(action.dKey+1,0,{              // and add a new  contents array to dialogue
+                        actor:nts[action.dKey].actor,
+                        contents:sc
+                    })
+                }
+                nts.splice(action.dKey+1,0,{  // insert Inputbox
                     actor:action.actor,
                     contents:[{
                         mode:'insert',
