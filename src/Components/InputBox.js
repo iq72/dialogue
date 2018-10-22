@@ -123,10 +123,6 @@ class InputBox extends React.Component{
                 }
                 if(13===e.keyCode){//'enter'
                     e.preventDefault();
-                    // if(this.props.text==0&&this.props.text!=='0'){//if empty
-                    //     this.props.switchActor();
-                    //     return
-                    // }
                     this.props.changeText({
                         actor:this.props.actor,
                         type:this.props.type,

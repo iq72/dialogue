@@ -9,7 +9,8 @@ const deleteEmpty = (array) =>{
          i=d.length-1;
         while(i>-1){
             item=d[i]
-            if(!item.mode!=='text'&&item.text==0&&item.text!=='0'){
+            if(!item.mode!=='text'&&item.text.match(/^\s*$/)){//dumb text, and empty
+                console.log('empty')
                 d.splice(i,1);
             }
 
@@ -48,7 +49,8 @@ const addAt = (array, item, index)=>{
 const dialogues = (state=[],action) =>{
     switch(action.type){
         case 'ADD_DIALOGUE':
-            if(action.content.text==0&&action.content.text!=='0'){//text is empty, do nothing
+            if(action.content.text.match(/^\s*$/)){//text is empty, do nothing
+                console.log('empty')
                 return state;
             }
 
