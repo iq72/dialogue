@@ -48,21 +48,13 @@ class InputBox extends React.Component{
     switchBack = ()=>{
         if(this.props.type==='act'){//'act' switch to 'talk'
             this.props.switchType()
+            return 'content'
         }else if(this.props.mode==='edit'){//not 'act' but 'edit', switch to 'insert'
             this.props.switchMode('insert')
-            this.props.insertAt({
-                mode:'content',
-                cKey:this.props.cKey,
-                dKey:this.props.dKey
-            });
+            return 'content'
         }else if(this.props.mode==='insert'){//not 'act' but 'insert', insert in next line
-            this.props.insertAt({
-                mode:'dialogue',
-                actor:this.props.actor==='customer'?'shopkeeper':'customer',
-                cKey:this.props.cKey,
-                dKey:this.props.dKey
-            });
             this.props.switchActor();
+            return 'dialogue'
         }else{//'add'
             this.props.switchActor();
         }
@@ -92,7 +84,7 @@ class InputBox extends React.Component{
                             this.props.switchType();
                         }
                     }else{
-                        this.switchBack();
+                        this.switchBack()
                     }
                  
                     this.props.clearText();
@@ -105,20 +97,25 @@ class InputBox extends React.Component{
                     this.props.changeText({
                         dKey:this.props.dKey,
                         cKey:this.props.cKey,
+                        type:this.props.type,
                         text:this.props.text
                     })
                     // this.props.switchType();
                     // this.props.switchActor();
-
-                    this.switchBack();
+                    this.props.insertAt({
+                        mode:this.switchBack(),
+                        actor:this.props.actor==='customer'?'shopkeeper':'customer',
+                        cKey:this.props.cKey,
+                        dKey:this.props.dKey
+                    });
                     this.props.clearText();
                     e.target.style.height='1.5em';
                 }
             break;
             case 'insert':
                 if(8===e.keyCode){//'backspace'
-                if(e.target.value!==''){
-                        this.bs=1
+                    if(e.target.value!==''){
+                            this.bs=1
                     }
                 }
                 if(13===e.keyCode){//'enter'
@@ -131,12 +128,17 @@ class InputBox extends React.Component{
                         text:this.props.text
                     });
                     
-                    if(e.shiftKey){//'shift enter' to change type
+                    if(e.shiftKey){//'shift enter' to just insert content
                         if(this.props.type==='talk'){
                             this.props.switchType();
                         }
                     }else{
-                        this.switchBack();
+                        this.props.insertAt({
+                            mode:this.switchBack(),
+                            actor:this.props.actor==='customer'?'shopkeeper':'customer',
+                            cKey:this.props.cKey,
+                            dKey:this.props.dKey
+                        });
                     }
                 
                     this.props.clearText();
@@ -149,8 +151,8 @@ class InputBox extends React.Component{
     };
 
     onKeyUp = (e)=>{
-        if('add'===this.props.mode){
-            if(8===e.keyCode){//'backspace' change type
+        // if('add'===this.props.mode){
+        if(8===e.keyCode){//'backspace' change type
                 if(''===e.target.value){
                     this.bs-=1
                     if(this.bs<0){
@@ -158,15 +160,13 @@ class InputBox extends React.Component{
                         this.bs=0
                     }
                 }
-            }
-            if(27===e.keyCode){// 'esc' empty textarea
+        }
+        if(27===e.keyCode){// 'esc' abord edting
                 if(''===e.target.value){
-                    this.props.type==='act'&&this.props.switchType()
-                }else{
                     this.props.clearText();
-                }
             }
         }
+        // }
     }
 
     render(){

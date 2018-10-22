@@ -44,7 +44,7 @@ const inputBox=(state={
             return({
                 ...state,
                 mode:'edit',
-                actor:'',
+                actor:action.node.actor,
                 // preActor:state.actor,
                 // preType:state.type,
                 type:action.node.type,

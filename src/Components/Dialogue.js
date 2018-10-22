@@ -20,7 +20,7 @@ class Dialogue extends React.Component{
                                 <InputBox key={index} mode='insert' 
                                 dKey={parseInt(this._reactInternalFiber.key,10)} cKey={index}
                                 />:
-                                <SingleP key={index} type={content.type} dKey={parseInt(this._reactInternalFiber.key,10)} cKey={index}>{content.text}</SingleP>
+                                <SingleP actor={this.props.actor} key={index} type={content.type} dKey={parseInt(this._reactInternalFiber.key,10)} cKey={index}>{content.text}</SingleP>
                             ))
                         }
             </Block>

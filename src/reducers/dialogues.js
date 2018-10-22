@@ -161,6 +161,7 @@ const dialogues = (state=[],action) =>{
                         ...dialogue
                     };
                     nd.contents[action.node.cKey].text=action.node.text;
+                    nd.contents[action.node.cKey].type=action.node.type;
                     nd.contents[action.node.cKey].mode='text';
                     return nd;
                 }else{
