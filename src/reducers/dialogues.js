@@ -94,6 +94,13 @@ const dialogues = (state=[],action) =>{
             // adjust keys if dialogues has deleted some empty items
             let cKey=action.cKey;
             let dKey=action.dKey;
+            
+            dKeyMinusRecords.forEach((dKeyMinus)=>{
+                if(dKeyMinus<=action.dKey){     // dKey matters only  if it's before action.dKey
+                    dKey --;
+                }
+            })
+
             cKeyMinusRecords.forEach((record)=>{  
                 if(action.dKey===record.dKey){ // cKey matters only  if it's in the same dialgoue
                     record.cKeyMinus.forEach((c)=>{ // and if it's  before action.cKey
@@ -103,11 +110,7 @@ const dialogues = (state=[],action) =>{
                     })     
                 }
             })
-            dKeyMinusRecords.forEach((dKeyMinus)=>{
-                if(dKeyMinus<=action.dKey){     // dKey matters only  if it's before action.dKey
-                    dKey --;
-                }
-            })
+
             cKeyMinusRecords=[];
             dKeyMinusRecords=[];
 
