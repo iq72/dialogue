@@ -95,7 +95,7 @@ const dialogues = (state=[],action) =>{
             let cKey=action.cKey;
             let dKey=action.dKey;
             let dKeyDeleted=false
-            
+            let nts = [...state];
 
             cKeyMinusRecords.forEach((record)=>{  
                 if(action.dKey===record.dKey){ // cKey matters only  if it's in the same dialgoue
@@ -124,6 +124,17 @@ const dialogues = (state=[],action) =>{
             dKeyMinusRecords=[];
 
             if(action.mode==='content'){ // just insert contents (in cKeys)
+                if(dKeyDeleted){
+                    dKeyDeleted=false;
+                    nts.splice(dKey+1,0,{
+                        contents:[{
+                            mode:'insert',
+                            text:'',
+                            type:'talk'
+                        }]
+                    })
+                    return nts
+                }else{
                 return state.map((dialogue,index)=>{
                     if(dKey===index){
                         dialogue.contents.splice(cKey+1,0,{
@@ -133,9 +144,8 @@ const dialogues = (state=[],action) =>{
                         })
                     }
                     return dialogue    
-                });
+                });}
             }else{ // insert in dKeys
-                let nts = [...state];
                 if (dKey<nts.length){//insert in the middle of dialogues
                     if(dKeyDeleted){
                         dKeyDeleted=false
@@ -172,7 +182,7 @@ const dialogues = (state=[],action) =>{
                 return nts
             }
         case 'CHANGE_TEXT':
-        
+
             let dialogues = []
             
             if(state.length===0){ //if dialogues is empty
