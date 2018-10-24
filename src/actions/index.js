@@ -78,3 +78,7 @@ export const insertDialogue = (dialogue) =>{
         }
     )
 }
+
+export const ex2JSON = () =>({
+    type:'EX2JSON'
+})

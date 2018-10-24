@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Dialogues from './Containers/Dialogues'
+import Json from './Containers/Json'
 
 class App extends Component {
 
@@ -16,7 +17,7 @@ class App extends Component {
       >
         <Dialogues />
         <div className="App-white-space"></div>
-        {/* <AddInput /> */}
+        <Json />
       </div>
     );
   }

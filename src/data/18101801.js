@@ -1,11 +1,4 @@
-export const data={
-  inputBox: {
-    type: 'talk',
-    actor: 'shopkeeper',
-    mode: 'edit',
-    text: '整机一年，屏幕、主板三年'
-  },
-  dialogues: [
+export const data=[
     {
       actor: 'customer',
       contents: [
@@ -406,5 +399,4 @@ export const data={
         }
       ]
     }
-  ]
-}
+]
