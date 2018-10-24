@@ -172,12 +172,10 @@ const dialogues = (state=[],action) =>{
                 return nts
             }
         case 'CHANGE_TEXT':
-            //if dialogues is empty
-            
-
+        
             let dialogues = []
             
-            if(state.length===0){
+            if(state.length===0){ //if dialogues is empty
                 dialogues.push({
                     actor:action.node.actor,
                     contents:[{

@@ -65,32 +65,32 @@ class InputBox extends React.Component{
 
 
         switch(this.props.mode){
-            case 'add':
-                if(8===e.keyCode){//'backspace'
-                    if(e.target.value!==''){
-                        this.bs=1
-                    }
-                }
-                if(13===e.keyCode){//'enter'
-                    e.preventDefault();
-                    this.props.addDialogue({
-                        actor:this.props.actor,
-                        type:this.props.type,
-                        text:e.target.value
-                    });
+            // case 'add':
+            //     if(8===e.keyCode){//'backspace'
+            //         if(e.target.value!==''){
+            //             this.bs=1
+            //         }
+            //     }
+            //     if(13===e.keyCode){//'enter'
+            //         e.preventDefault();
+            //         this.props.addDialogue({
+            //             actor:this.props.actor,
+            //             type:this.props.type,
+            //             text:e.target.value
+            //         });
                     
-                    if(e.shiftKey){//'shift enter' to change type
-                        if(this.props.type==='talk'){
-                            this.props.switchType();
-                        }
-                    }else{
-                        this.switchBack()
-                    }
+            //         if(e.shiftKey){//'shift enter' to change type
+            //             if(this.props.type==='talk'){
+            //                 this.props.switchType();
+            //             }
+            //         }else{
+            //             this.switchBack()
+            //         }
                  
-                    this.props.clearText();
-                    e.target.style.height='1.5em';
-                }
-            break;
+            //         this.props.clearText();
+            //         e.target.style.height='1.5em';
+            //     }
+            // break;
             case 'edit':
                 if(13===e.keyCode){//'enter
                     e.preventDefault();
@@ -105,7 +105,7 @@ class InputBox extends React.Component{
                     // this.props.switchActor();
                     this.props.insertAt({
                         mode:this.switchBack(),
-                        actor:this.props.actor==='customer'?'shopkeeper':'customer',
+                        actor:this.props.actor,
                         cKey:this.props.cKey,
                         dKey:this.props.dKey
                     });
@@ -130,9 +130,12 @@ class InputBox extends React.Component{
                     });
                     
                     if(e.shiftKey){//'shift enter' to just insert content
-                        if(this.props.type==='talk'){
-                            this.props.switchType();
-                        }
+                        this.props.insertAt({
+                            mode:'content',
+                            actor:this.props.actor,
+                            cKey:this.props.cKey,
+                            dKey:this.props.dKey
+                        })
                     }else{
                         this.props.insertAt({
                             mode:this.switchBack(),
