@@ -1,6 +1,3 @@
-const deletItemFromArray =(array, item)=>{
-    array.splice(array.indexOf(item));
-}
 
 let cKeyMinus = []
 let cKeyMinusRecords = []
@@ -38,27 +35,6 @@ const deleteEmpty = (array) =>{
     m--;}
     return array;
 }
-
-const deleteAt = (array,index)=>{
-    if(array.length>index){
-        array.splice(index,1);
-        // return array;
-    }else{
-        console.log(`
-            ERROR: index ${index} is out of range
-        `)
-    }
-}
-
-const addAt = (array, item, index)=>{
-    if(index&&(array.length-1)>index){ // add in middle
-        array.splice(index,0,item);
-    }else{ // add to end
-        array.push(DataTransferItem)
-    }
-    // return array;
-}
-
 
 const dialogues = (state=[],action) =>{
     switch(action.type){
@@ -127,6 +103,7 @@ const dialogues = (state=[],action) =>{
                 if(dKeyDeleted){
                     dKeyDeleted=false;
                     nts.splice(dKey+1,0,{
+                        actor:action.actor,
                         contents:[{
                             mode:'insert',
                             text:'',
@@ -181,6 +158,7 @@ const dialogues = (state=[],action) =>{
                 }
                 return nts
             }
+
         case 'CHANGE_TEXT':
 
             let dialogues = []
@@ -196,7 +174,7 @@ const dialogues = (state=[],action) =>{
                 })
             }else{
                 dialogues=state.map((dialogue,index)=>{
-                    if(action.node.dKey===index){
+                    if(action.node.dKey===index){ // location dialogue to change
                         let nd={
                             ...dialogue
                         };
