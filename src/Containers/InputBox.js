@@ -9,7 +9,7 @@ const mapStateToProps = (state)=>({
 
 const mapDispatchToProps = (dispatch)=>({
     switchActor: (step)=>{dispatch(switchActor(step))},
-    switchType: ()=>{dispatch(switchType())},
+    switchType: (t)=>{dispatch(switchType(t))},
     switchMode: (mode)=>{dispatch(switchMode(mode))},
     insertAt: (pos)=>{dispatch(insertAt(pos))},
     addDialogue:(dialogue)=>{dispatch(addDialogue(dialogue))},

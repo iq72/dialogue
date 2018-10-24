@@ -47,7 +47,7 @@ class InputBox extends React.Component{
 
     switchBack = ()=>{
         if(this.props.type==='act'){//'act' switch to 'talk'
-            this.props.switchType()
+            this.props.switchType(this.props.type)
             return 'content'
         }else if(this.props.mode==='edit'){//not 'act' but 'edit', switch to 'insert'
             this.props.switchMode('insert')
@@ -76,7 +76,7 @@ class InputBox extends React.Component{
                         type:this.props.type,
                         text:this.props.text
                     })
-                    // this.props.switchType();
+                    // this.props.switchType(this.props.type);
                     // this.props.switchActor();
                     this.props.insertAt({
                         mode:this.switchBack(),
@@ -135,7 +135,7 @@ class InputBox extends React.Component{
                 if(''===e.target.value){
                     this.bs-=1
                     if(this.bs<0){
-                        this.props.switchType()
+                        this.props.switchType(this.props.type)
                         this.bs=0
                     }
                 }

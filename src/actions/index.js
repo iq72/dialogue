@@ -1,12 +1,10 @@
 // let i=0
-let k=1
 
 
-export const switchType = ()=>{
-    k*=-1
+export const switchType = (t)=>{
     return({
         type:'SWITCH_TYPE',
-        t:k>0?'talk':'act'
+        t:t==='talk'?'act':'talk'
     })
 }
 
