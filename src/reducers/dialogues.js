@@ -172,19 +172,35 @@ const dialogues = (state=[],action) =>{
                 return nts
             }
         case 'CHANGE_TEXT':
-            let dialogues = state.map((dialogue,index)=>{
-                if(action.node.dKey===index){
-                    let nd={
-                        ...dialogue
-                    };
-                    nd.contents[action.node.cKey].text=action.node.text;
-                    nd.contents[action.node.cKey].type=action.node.type;
-                    nd.contents[action.node.cKey].mode='text';
-                    return nd;
-                }else{
-                    return dialogue;
-                }
-            });
+            //if dialogues is empty
+            
+
+            let dialogues = []
+            
+            if(state.length===0){
+                dialogues.push({
+                    actor:action.node.actor,
+                    contents:[{
+                        mode:'text',
+                        type:action.node.type,
+                        text:action.node.text,
+                    }]
+                })
+            }else{
+                dialogues=state.map((dialogue,index)=>{
+                    if(action.node.dKey===index){
+                        let nd={
+                            ...dialogue
+                        };
+                        nd.contents[action.node.cKey].text=action.node.text;
+                        nd.contents[action.node.cKey].type=action.node.type;
+                        nd.contents[action.node.cKey].mode='text';
+                        return nd;
+                    }else{
+                        return dialogue;
+                    }
+                });
+            }
             return (deleteEmpty(dialogues)); // delete empty items
 
             case 'START_EDITING':

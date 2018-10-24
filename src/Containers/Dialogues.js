@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Dialogue from '../Components/Dialogue'
-import AddInput from './AddInput'
+import InputBox from './InputBox'
+import Block from '../Components/Block'
 
 const Dialogues = ({dialogues}) =>(
     <div>
@@ -10,7 +11,11 @@ const Dialogues = ({dialogues}) =>(
                 <Dialogue key={index} {...dialogue} />
             )
         })}
-        <AddInput />
+        {dialogues.length===0&&
+        <Block>
+            <InputBox cKey={0} dKey={0}/>
+        </Block>
+        }
     </div>
 )
 

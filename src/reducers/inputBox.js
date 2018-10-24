@@ -8,7 +8,7 @@ let i=0;
 const inputBox=(state={
     type:'talk',
     actor:'customer',
-    mode:'add'
+    mode:'insert'
 }, action)=>{
     switch(action.type){
         case "SWITCH_ACTOR":
