@@ -13,7 +13,7 @@ const deleteEmpty = (array) =>{
          i=d.length-1;
         while(i>-1){
             item=d[i]
-            if(item.mode!=='insert'&&item.text.match(/^\s*$/)){//dumb text, and empty
+            if(item.mode!=='insert'&&(!item.text||item.text.match(/^\s*$/))){//dumb text, and empty or not even have text
                 console.log('minus c')
                 d.splice(i,1);
                 cKeyMinus.push(i);
@@ -94,27 +94,36 @@ const dialogues = (state=[],action) =>{
             // adjust keys if dialogues has deleted some empty items
             let cKey=action.cKey;
             let dKey=action.dKey;
+            let dKeyDeleted=false
             
-            dKeyMinusRecords.forEach((dKeyMinus)=>{
-                if(dKeyMinus<=action.dKey){     // dKey matters only  if it's before action.dKey
-                    dKey --;
-                }
-            })
 
             cKeyMinusRecords.forEach((record)=>{  
                 if(action.dKey===record.dKey){ // cKey matters only  if it's in the same dialgoue
                     record.cKeyMinus.forEach((c)=>{ // and if it's  before action.cKey
                         if(c<=action.cKey){
                             cKey--;
+                            cKey<0&&cKey++; //if cKey is the first one,  it's still the first one (0)
                         }
                     })     
                 }
             })
 
+            dKeyMinusRecords.forEach((dKeyMinus)=>{
+                if(dKeyMinus<action.dKey){     // dKey matters only  if it's before action.dKey
+                    dKey --;
+                }else if(dKeyMinus===action.dKey){// if action.dKey is the one that's deleted
+                    console.log('demolish InputBox')
+                    dKey --;
+                    dKey<0&&dKey++;
+                    dKeyDeleted=true;
+                }
+            })
+
+
             cKeyMinusRecords=[];
             dKeyMinusRecords=[];
 
-            if(action.mode==='content'){ // just insert contents
+            if(action.mode==='content'){ // just insert contents (in cKeys)
                 return state.map((dialogue,index)=>{
                     if(dKey===index){
                         dialogue.contents.splice(cKey+1,0,{
@@ -125,18 +134,23 @@ const dialogues = (state=[],action) =>{
                     }
                     return dialogue    
                 });
-            }else{
+            }else{ // insert in dKeys
                 let nts = [...state];
-                if (dKey<nts.length-1){//insert in the middle of dialogues
-                    let cs = nts[dKey].contents;
-                    if (cs.length-1>cKey){ // insert in the middle of contents 
-                        let sc = cs.splice(cKey+1,(cs.length-cKey-1)); //split it
-                        nts.splice(dKey+1,0,{              // and add a new  contents array to dialogue
-                            actor:nts[dKey].actor,
-                            contents:sc
-                        })
+                if (dKey<nts.length){//insert in the middle of dialogues
+                    if(dKeyDeleted){
+                        dKeyDeleted=false
+                    }else{ //we care about cKey only if dKey is not the deleted one
+                        let cs = nts[dKey].contents;
+                        if (cs.length>cKey){ // insert in the middle of contents 
+                            let sc = cs.splice(cKey+1,(cs.length-cKey-1)); //split it
+                            if(sc.length>0){// if sc is not empty
+                                nts.splice(dKey+1,0,{              // and add a new  contents array to dialogue
+                                    actor:nts[dKey].actor,
+                                    contents:sc
+                                })
+                            }
+                        }
                     }
-                
                     nts.splice(dKey+1,0,{  // insert Inputbox
                         actor:action.actor,
                         contents:[{
