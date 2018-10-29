@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Dialogues from './Containers/Dialogues'
 import Json from './Containers/Json'
+import CustomerForm from './Components/CustomerForm'
 
 class App extends Component {
 
@@ -15,6 +16,7 @@ class App extends Component {
       <div className="App" 
       // ref={(div)=>{this.app=div}}
       >
+        <CustomerForm />
         <Dialogues />
         <div className="App-white-space"></div>
         <Json />
