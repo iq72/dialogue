@@ -1,6 +1,15 @@
 import React from 'react'
 import {Formik, Field, Form} from 'formik'
+import {InputNumber,DatePicker,Input, Radio, Select, Checkbox, Col} from 'antd'
 
+const RadioGroup=Radio.Group
+const InputGroup = Input.Group
+const Option = Select.Option
+const shopkeepers=[
+    <Option key={0}>冯小兵</Option>,
+    <Option key={1}>胥雨</Option>,
+    <Option key={2}>临促</Option>
+]
 
 
 const CustomerForm = ()=>{
@@ -10,34 +19,48 @@ return(
     (<Form>
         <fieldset>
             <legend>基本信息</legend>
-            <label>编号
-                <Field type='text' name='sN'/>
-            </label>
-            <label>时长
-                <Field type='text' name='timeLast'/>
-            </label>
+            <InputGroup >
+            <Col span={8}>
+                <Input addonBefore='编号' name='sN' placeholder='编号'/>
+            </Col>
+            <Col span={5}>
+                <Input addonBefore='在店时长' name='timeLast' defaultValue={10} step={10} formatter={value => `${value}分钟`}/>
+            </Col>
+            </InputGroup>
+            <br></br>
+            <br></br>
+            <InputGroup compact>
+            <Checkbox name='firstTime'>首次到店</Checkbox>
             <label>
-                <Field type='checkbox' name='firstTime'/>首次到店
+                <Input addonBefore='当日到店次数' min={1} max={5} defaultValue={1} />
             </label>
-            <label>当日到店次数
-                <Field type='range' min='0' max='5' name='timesEntered'/>
-            </label>
+            </InputGroup>
+            <br/>
+            <br />
             <label>导购
-                <Field type='text' name='shopkeepers'/>
+                <Select compact
+                    mode='tags' 
+                    placeholder='可以选择多人'
+                    >{shopkeepers}</Select>
+
             </label>
+            
         </fieldset>
+        <br></br>
         <fieldset>
             <legend>用户信息</legend>
             <div>主要决策人 <br />
             <label>姓名
-                <Field type='text' name='customerMain'/>
+                <Input type='text' name='customerMain'/>
             </label>
-            <label>
-                <Field type='radio' name='gender' value='male'/>男
-            </label>
-            <label>
-                <Field type='radio' name='gender' value='female' />女
-            </label>
+            <RadioGroup>
+                <label>
+                    <Radio name='gender' value='male'/>男
+                </label>
+                <label>
+                    <Radio name='gender' value='female' />女
+                </label>
+            </RadioGroup>
             <label>年龄段
                 <Field type='text' name='shopkeepers'/>
             </label>
@@ -49,108 +72,125 @@ return(
             </label>
             </div>
             <div>经济水平<br />
+            <RadioGroup>
             <label>
-                <Field type='radio' name='richOpoor' value='veryPoor'/>非常拮据
+                <Radio name='richOpoor' value='veryPoor'/>非常拮据
             </label>
             <label>
-                <Field type='radio' name='richOpoor' value='poor'/>有点拮据
+                <Radio name='richOpoor' value='poor'/>有点拮据
             </label>
             <label>
-                <Field type='radio' name='richOpoor' value='middle'/>一般
+                <Radio name='richOpoor' value='middle'/>一般
             </label>
             <label>
-                <Field type='radio' name='richOpoor' value='rich'/>有点富裕
+                <Radio name='richOpoor' value='rich'/>有点富裕
             </label>
             <label>
-                <Field type='radio' name='richOpoor' value='veryRich'/>非常富裕
+                <Radio name='richOpoor' value='veryRich'/>非常富裕
             </label>
+            </RadioGroup>
             </div>
             <div>预算严格程度<br />
+            <RadioGroup>
             <label>
-                <Field type='radio' name='budget' value='tight'/>严格（500以内）
+                <Radio name='budget' value='tight'/>严格（500以内）
             </label>
             <label>
-                <Field type='radio' name='budget' value='middle'/>一般（1000以内)
+                <Radio name='budget' value='middle'/>一般（1000以内)
             </label>
             <label>
-                <Field type='radio' name='budget' value='loose'/>宽松（1000以上）
+                <Radio name='budget' value='loose'/>宽松（1000以上）
             </label>
+            </RadioGroup>
             </div>
             <div>时间紧迫性<br />
+            <RadioGroup>
             <label>
-                <Field type='radio' name='urgency' value='urgency'/>今天就买（定）
+                <Radio name='urgency' value='urgency'/>今天就买（定）
             </label>
             <label>
-                <Field type='radio' name='urgency' value='middle'/>这几天就买（定）
+                <Radio name='urgency' value='middle'/>这几天就买（定）
             </label>
             <label>
-                <Field type='radio' name='urgency' value='causal'/>不着急买
+                <Radio name='urgency' value='causal'/>不着急买
             </label>
+            </RadioGroup>
             </div>
             <div>需求触发
             <label>
-                <Field type='radio' name='richOpoor' value='rich'/>富裕
+                <Radio name='richOpoor' value='rich'/>富裕
             </label>
             <label>
-                <Field type='radio' name='richOpoor' value='middle'/>一般
+                <Radio name='richOpoor' value='middle'/>一般
             </label>
             <label>
-                <Field type='radio' name='richOpoor' value='poor'/>贫穷
+                <Radio name='richOpoor' value='poor'/>贫穷
             </label>
             </div>
             <div>使用者
             <label>
-                <Field type='radio' name='budget' value='rich'/>富裕
+                <Radio name='budget' value='rich'/>富裕
             </label>
             <label>
-                <Field type='radio' name='budget' value='middle'/>一般
+                <Radio name='budget' value='middle'/>一般
             </label>
             <label>
-                <Field type='radio' name='budget' value='poor'/>贫穷
+                <Radio name='budget' value='poor'/>贫穷
             </label>
             </div>
             <div>使用空间
             <label>
-                <Field type='radio' name='urgency' value='rich'/>富裕
+                <Radio name='urgency' value='rich'/>富裕
             </label>
             <label>
-                <Field type='radio' name='urgency' value='middle'/>一般
+                <Radio name='urgency' value='middle'/>一般
             </label>
             <label>
-                <Field type='radio' name='urgency' value='poor'/>贫穷
+                <Radio name='urgency' value='poor'/>贫穷
             </label>
             </div>
+            <div>联系方式</div>
+            <div>送货时间、价格</div>
         </fieldset>
         <fieldset>
             <legend>产品信息</legend>
-            <div>安装方式<br />
+            
+            <div>购买情况<br></br>
+            <RadioGroup>
             <label>
-                <Field type='radio' name='hang' value='hang'/>挂
+                <Radio name='purchased' value='ed'/>已购
             </label>
             <label>
-                <Field type='radio' name='hang' value='sit'/>座
+                <Radio name='purchased' value='pre'/>预定
             </label>
+            <label>
+                <Radio name='purchased' value='no'/>未购
+            </label>
+            </RadioGroup>
             </div>
-            <div>购买情况
-            <label>
-                <Field type='radio' name='purchased' value='ed'/>已购
-            </label>
-            <label>
-                <Field type='radio' name='purchased' value='pre'/>预定
-            </label>
-            <label>
-                <Field type='radio' name='purchased' value='no'/>未购
-            </label>
-            </div>
+            
             <div>关注过的产品
             <label>
-                <Field type='text' name='looked'/>
+                <Input type='text' name='looked'/>
             </label>
             </div>
             <div>对比过的品牌
             <label>
-                <Field type='text' name='otherBrands' />
+                <Input type='text' name='otherBrands' />
             </label>
+            </div>
+            <div>安装方式<br />
+            <RadioGroup>
+            <label>
+                <Radio name='hang' value='hang'/>挂
+            </label>
+            <label>
+                <Radio name='hang' value='sit'/>座
+            </label>
+            </RadioGroup>
+            </div>
+            <div>安装日期<br />
+            <DatePicker />
             </div>
         </fieldset>
         
