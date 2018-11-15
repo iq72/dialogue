@@ -21,10 +21,14 @@ return(
             <legend>基本信息</legend>
             <InputGroup >
             <Col span={8}>
-                <Input addonBefore='编号' name='sN' placeholder='编号'/>
+                <label>编号：
+                <Input name='sn' placeholder='编号'/>
+                </label>
             </Col>
             <Col span={5}>
-                <Input addonBefore='在店时长' name='timeLast' defaultValue={10} step={10} formatter={value => `${value}分钟`}/>
+                <label>在店时长： 
+                <InputNumber name='timeLast' min={0} max={600} defaultValue={10} step={10} formatter={value => `${value}分钟`}/>
+                </label>
             </Col>
             </InputGroup>
             <br></br>
@@ -50,17 +54,16 @@ return(
         <fieldset>
             <legend>用户信息</legend>
             <div>主要决策人 <br />
-            <label>姓名
+            <label>姓名：
                 <Input type='text' name='customerMain'/>
             </label>
+            <label>性别：
             <RadioGroup>
-                <label>
-                    <Radio name='gender' value='male'/>男
-                </label>
-                <label>
-                    <Radio name='gender' value='female' />女
-                </label>
+                    <Radio.Button name='gender' value='male'> 男 </Radio.Button>
+                    <Radio.Button name='gender' value='female'> 女 </Radio.Button>
             </RadioGroup>
+            </label>
+            <br/>
             <label>年龄段
                 <Field type='text' name='shopkeepers'/>
             </label>
