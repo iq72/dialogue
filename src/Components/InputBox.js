@@ -148,6 +148,18 @@ class InputBox extends React.Component{
         // }
     }
 
+    onBlur= (e)=>{
+        console.log('blur')
+        // console.log(e.target)
+        this.props.changeText({
+            actor:this.props.actor,
+            type:this.props.type,
+            dKey:this.props.dKey,
+            cKey:this.props.cKey,
+            text:this.props.text
+        });
+    }
+
     render(){
     return (
         <PureContainer style={{'display':'flex'}}>
@@ -175,6 +187,7 @@ class InputBox extends React.Component{
                 type={this.props.type}
                 onKeyDown={(e)=>{this.onKeyDown(e)}}
                 onKeyUp={(e)=>{this.onKeyUp(e)}} 
+                onBlur={(e)=>this.onBlur(e)}
                 onScroll={(e)=>{
                     e.target.style.height=e.target.scrollHeight+'px' //auto resize textarea
                 }}

@@ -20,5 +20,11 @@
   "devDependencies": {
     "redux-devtools": "^3.4.1",
     "redux-devtools-extension": "^2.13.5"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
