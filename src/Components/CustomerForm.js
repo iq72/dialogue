@@ -34,7 +34,10 @@ return(
             <br></br>
             <br></br>
             <InputGroup compact>
-            <Checkbox name='firstTime'>首次到店</Checkbox>
+            <Radio.Group buttonStyle='solid'>
+                <Radio.Button>首次到店</Radio.Button>
+            </Radio.Group>
+            
             <label>
                 <Input addonBefore='当日到店次数' min={1} max={5} defaultValue={1} />
             </label>
@@ -58,14 +61,14 @@ return(
                 <Input type='text' name='customerMain'/>
             </label>
             <label>性别：
-            <RadioGroup>
+            <RadioGroup buttonStyle='solid'>
                     <Radio.Button name='gender' value='male'> 男 </Radio.Button>
                     <Radio.Button name='gender' value='female'> 女 </Radio.Button>
             </RadioGroup>
             </label>
             <br/>
             <label>年龄段
-                <Field type='text' name='shopkeepers'/>
+                <Input type='text' name='shopkeepers'/>
             </label>
             </div>
             <div>同行人员
